@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CyberNexus</string>
+    <string name="login">Giriş</string>
+    <string name="password">Şifre</string>
+    <string name="next">Sonraki</string>
+    <string name="cart">Sepet</string>
+    <string name="home">Ana Sayfa</string>
+    <string name="favorites">Favoriler</string>
+    <string name="search">Ara</string>
+    <string name="name">İsim</string>
+</resources>
