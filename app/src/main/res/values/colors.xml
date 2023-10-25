@@ -6,4 +6,10 @@
     <color name="purple">#80AB47BC</color>
     <color name="green_dark_1">#FF024447</color>
     <color name="green_dark_2">#FF045651</color>
+    <color name="green_dark_3">#FF076B5B</color>
+    <color name="green_dark_4">#FF0A8061</color>
+    <color name="green_default">#FF0F9565</color>
+    <color name="green_light_1">#FF9CDF9C</color>
+    <color name="green_light_2">#FF9CF4BA</color>
+    <color name="green_light_3">#FFCCF9D7</color>
 </resources>
