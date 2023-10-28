@@ -4,7 +4,8 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
-    <style name="splashScreenTheme" parent="Theme.AppCompat.DayNight.NoActionBar"/>
+
+    <style name="splashScreenTheme" parent="Theme.AppCompat.DayNight.NoActionBar" />
 
     <style name="Theme.CyberNexus" parent="Base.Theme.CyberNexus" />
 </resources>

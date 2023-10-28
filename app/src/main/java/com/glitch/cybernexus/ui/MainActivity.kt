@@ -1,8 +1,9 @@
 package com.glitch.cybernexus.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -32,31 +33,31 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.loginFragment -> binding.bottomNavigation.visibility = View.VISIBLE
+                R.id.loginFragment -> binding.bottomNavigation.visibility = View.GONE
                 //R.id.mineFragment -> showBottomNav()
-                else -> binding.bottomNavigation.visibility = View.GONE
+                else -> binding.bottomNavigation.visibility = View.VISIBLE
             }
         }
         with(binding) {
             bottomNavigation.setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.home -> {
-                        //loadFragment(HomeFragment())
+                        findNavController().navigate(R.id.home)
                         true
                     }
 
                     R.id.search -> {
-                        //loadFragment(ChatFragment())
+                        findNavController().navigate(R.id.search)
                         true
                     }
 
                     R.id.favorites -> {
-                        //loadFragment(SettingFragment())
+                        findNavController().navigate(R.id.favorites)
                         true
                     }
 
                     R.id.cart -> {
-                        //loadFragment(SettingFragment())
+                        findNavController().navigate(R.id.cart)
                         true
                     }
 
