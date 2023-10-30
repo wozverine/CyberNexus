@@ -37,7 +37,8 @@ class MainActivity : AppCompatActivity() {
                 //R.id.mineFragment -> showBottomNav()
                 else -> binding.bottomNavigation.visibility = View.VISIBLE
             }
-        }/*with(binding) {
+        }
+        with(binding) {
             bottomNavigation.setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.home -> {
