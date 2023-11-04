@@ -3,7 +3,8 @@
     <string name="app_name">CyberNexus</string>
     <string name="password">Şifre</string>
     <string name="next">Sonraki</string>
-    <string name="signup">Üye Ol</string>
+    <string name="signup">Üye değil misiniz? Üye olun.</string>
+    <string name="signup_socials">Başka hesaplarla üye girişi</string>
     <string name="signin">Giriş Yap</string>
     <string name="cart">Sepet</string>
     <string name="home">Ana Sayfa</string>

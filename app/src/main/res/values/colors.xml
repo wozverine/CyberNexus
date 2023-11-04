@@ -3,7 +3,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white_transparent">#50FFFFFF</color>
-    <color name="purple">#80AB47BC</color>
+    <color name="black_transparent">#50000000</color>
+    <color name="purple_1">#80AB47BC</color>
+    <color name="purple_2">#FCA8F3</color>
+    <color name="maroon">#802535</color>
     <color name="green_dark_1">#FF024447</color>
     <color name="green_dark_2">#FF045651</color>
     <color name="green_dark_3">#FF076B5B</color>
@@ -12,4 +15,6 @@
     <color name="green_light_1">#FF9CDF9C</color>
     <color name="green_light_2">#FF9CF4BA</color>
     <color name="green_light_3">#FFCCF9D7</color>
+    <color name="dark_navy">#1E1F28</color>
+    <color name="dark_gray">#2A2C36</color>
 </resources>
