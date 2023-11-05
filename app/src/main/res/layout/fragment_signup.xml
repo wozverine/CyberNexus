@@ -7,53 +7,66 @@
     tools:context=".ui.signup.SignUpFragment">
 
     <ImageView
-        android:id="@+id/iv_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:importantForAccessibility="no"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:alpha="0.8"
-        android:background="@drawable/rectangle_1"
+        android:background="@color/dark_navy"
         android:importantForAccessibility="no"
         app:layout_constraintBottom_toBottomOf="@id/constraint_2"
         app:layout_constraintTop_toTopOf="@id/constraint_2" />
+
+    <ImageView
+        android:id="@+id/iv_ellipse_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ellipse1"
+        android:importantForAccessibility="no"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_ellipse_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ellipse2"
+        android:importantForAccessibility="no"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/login_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30sp"
+        android:layout_marginTop="100sp"
+        android:text="@string/signup"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/login_title_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
-            android:text="@string/signup"
-            android:textColor="@color/black"
-            android:textSize="50sp"
-            app:layout_constraintBottom_toTopOf="@id/login_name_til"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_ellipse_1">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/login_name_til"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="30dp"
-            android:background="@color/white_transparent"
+            android:layout_marginVertical="10dp"
+            android:textColorHint="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/login_password_til"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_title_tv"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             app:startIconDrawable="@drawable/icon_person">
 
@@ -61,7 +74,8 @@
                 android:id="@+id/etMailLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white_transparent"
+                android:background="@color/dark_gray"
+                android:textColor="@color/white"
                 android:hint="@string/email"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -71,21 +85,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/white_transparent"
+            android:textColorHint="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/login_next_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login_name_til"
             app:layout_constraintVertical_chainStyle="packed"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/purple"
+            app:passwordToggleTint="@color/purple_1"
             app:startIconDrawable="@drawable/icon_lock">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/etPasswordLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white_transparent"
+                android:background="@color/dark_gray"
+                android:textColor="@color/white"
                 android:hint="@string/password"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -94,13 +109,28 @@
             android:id="@+id/login_next_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
+            android:layout_marginVertical="30sp"
+            android:backgroundTint="@color/maroon"
             android:text="@string/signup"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login_password_til"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintWidth_percent="0.4" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/signup_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20sp"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

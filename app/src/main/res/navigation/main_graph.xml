@@ -29,5 +29,16 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.glitch.cybernexus.ui.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"/>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.glitch.cybernexus.ui.cart.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.glitch.cybernexus.ui.favorites.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
 </navigation>

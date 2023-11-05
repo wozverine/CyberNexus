@@ -3,12 +3,15 @@ package com.glitch.cybernexus.ui
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.glitch.cybernexus.R
 import com.glitch.cybernexus.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -37,27 +40,37 @@ class MainActivity : AppCompatActivity() {
                 //R.id.mineFragment -> showBottomNav()
                 else -> binding.bottomNavigation.visibility = View.VISIBLE
             }
+
         }
-        with(binding) {
+
+        binding.bottomNavigation.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.home -> navController.navigate(R.id.homeFragment)
+                //R.id.search -> navController.navigate(R.id.)
+                R.id.favorites -> navController.navigate(R.id.favoritesFragment)
+                R.id.cart -> navController.navigate(R.id.cartFragment)
+            }
+            true
+        }/*with(binding) {
             bottomNavigation.setOnItemSelectedListener {
                 when (it.itemId) {
-                    R.id.home -> {
-                        findNavController().navigate(R.id.home)
+                    com.glitch.cybernexus.R.id.home -> {
+                        loadFragment(com.glitch.cybernexus.R.id.homeFragment)
                         true
                     }
 
-                    R.id.search -> {
-                        findNavController().navigate(R.id.search)
+                    com.glitch.cybernexus.R.id.search -> {
+                        findNavController().navigate(com.glitch.cybernexus.R.id.search)
                         true
                     }
 
-                    R.id.favorites -> {
-                        findNavController().navigate(R.id.favorites)
+                    com.glitch.cybernexus.R.id.favorites -> {
+                        findNavController().navigate(com.glitch.cybernexus.R.id.favorites)
                         true
                     }
 
-                    R.id.cart -> {
-                        findNavController().navigate(R.id.cart)
+                    com.glitch.cybernexus.R.id.cart -> {
+                        findNavController().navigate(com.glitch.cybernexus.R.id.cart)
                         true
                     }
 
@@ -66,6 +79,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        }
+        }*/
     }
 }

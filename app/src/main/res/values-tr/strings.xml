@@ -3,12 +3,19 @@
     <string name="app_name">CyberNexus</string>
     <string name="password">Şifre</string>
     <string name="next">Sonraki</string>
-    <string name="signup">Üye değil misiniz? Üye olun.</string>
+    <string name="signup_long">Üye değil misiniz? Üye olun.</string>
     <string name="signup_socials">Başka hesaplarla üye girişi</string>
-    <string name="signin">Giriş Yap</string>
+    <string name="login">Hesabınız var mı? Giriş yapın</string>
+    <string name="mail_error">Email adresi uygun değil. isim@email.com formatında olmalı></string>
+    <string name="sign_in">Giriş Yap</string>
+    <string name="signup">Üye Ol</string>
     <string name="cart">Sepet</string>
     <string name="home">Ana Sayfa</string>
     <string name="favorites">Favoriler</string>
     <string name="search">Ara</string>
     <string name="email">Mail Adresi</string>
+    <string name="flash_sale">Flaş indirimler</string>
+    <string name="category">Kategoriler</string>
+    <string name="check_out">Satın Al</string>
+    <string name="clear_cart">Sepeti Temizle</string>
 </resources>

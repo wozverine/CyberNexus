@@ -2,12 +2,19 @@
     <string name="app_name">CyberNexus</string>
     <string name="password">Password</string>
     <string name="next">Next</string>
-    <string name="signup">Don\'t have an account? Sign up.</string>
+    <string name="signup_long">Don\'t have an account? Sign up.</string>
     <string name="signup_socials">Or login with social account</string>
-    <string name="signin">Sign In</string>
+    <string name="login">Do you have an account? Login</string>
+    <string name="mail_error">Not a valid email address. Should be your@email.com></string>
+    <string name="sign_in">Sign In</string>
+    <string name="signup">Sign Up</string>
     <string name="cart">Cart</string>
     <string name="home">Home</string>
     <string name="favorites">Favorites</string>
     <string name="search">Search</string>
     <string name="email">Email</string>
+    <string name="flash_sale">Flash Sale</string>
+    <string name="category">Categories</string>
+    <string name="check_out">Check Out</string>
+    <string name="clear_cart">Clear Cart</string>
 </resources>
