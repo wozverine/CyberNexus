@@ -18,4 +18,6 @@
     <string name="category">Kategoriler</string>
     <string name="check_out">Satın Al</string>
     <string name="clear_cart">Sepeti Temizle</string>
+    <string name="product_name">Ürün Adı</string>
+    <string name="products">Ürünler</string>
 </resources>

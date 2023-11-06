@@ -17,4 +17,6 @@
     <string name="category">Categories</string>
     <string name="check_out">Check Out</string>
     <string name="clear_cart">Clear Cart</string>
+    <string name="product_name">Product Name</string>
+    <string name="products">Products</string>
 </resources>

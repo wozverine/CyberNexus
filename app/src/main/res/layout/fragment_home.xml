@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,32 +11,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <androidx.appcompat.widget.SearchView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </androidx.appcompat.widget.SearchView>
+            android:layout_height="wrap_content"></androidx.appcompat.widget.SearchView>
     </LinearLayout>
+
     <TextView
         android:id="@+id/flash_sale_tv"
+        style="@style/TextAppearance.AppCompat.Display1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/flash_sale">
-    </TextView>
+        android:text="@string/flash_sale" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="wrap_content"
+        android:id="@+id/flash_sale_rv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="4"
+        tools:listitem="@layout/item_sale" />
+
     <TextView
         android:id="@+id/category_tv"
+        style="@style/TextAppearance.AppCompat.Display1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/category">
-    </TextView>
+        android:text="@string/category" />
+
+    <TextView
+        android:id="@+id/products_tv"
+        style="@style/TextAppearance.AppCompat.Display1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/products" />
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/all_products_rv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:orientation="horizontal" />
 
 </LinearLayout>
