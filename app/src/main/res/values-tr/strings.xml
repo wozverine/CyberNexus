@@ -4,8 +4,8 @@
     <string name="password">Şifre</string>
     <string name="next">Sonraki</string>
     <string name="signup_long">Üye değil misiniz? Üye olun.</string>
-    <string name="signup_socials">Başka hesaplarla üye girişi</string>
-    <string name="login">Hesabınız var mı? Giriş yapın</string>
+    <string name="signup_socials">Başka hesaplarla üye girişi.</string>
+    <string name="login">Hesabınız var mı? Giriş yapın.</string>
     <string name="mail_error">Email adresi uygun değil. isim@email.com formatında olmalı></string>
     <string name="sign_in">Giriş Yap</string>
     <string name="signup">Üye Ol</string>

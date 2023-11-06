@@ -3,8 +3,6 @@ package com.glitch.cybernexus.ui
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -22,7 +20,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.toolbar)
 
         val navHostFragment =
@@ -32,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
         NavigationUI.setupWithNavController(binding.bottomNavigation, navController)
+        supportActionBar?.hide()
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
@@ -51,34 +49,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.cart -> navController.navigate(R.id.cartFragment)
             }
             true
-        }/*with(binding) {
-            bottomNavigation.setOnItemSelectedListener {
-                when (it.itemId) {
-                    com.glitch.cybernexus.R.id.home -> {
-                        loadFragment(com.glitch.cybernexus.R.id.homeFragment)
-                        true
-                    }
-
-                    com.glitch.cybernexus.R.id.search -> {
-                        findNavController().navigate(com.glitch.cybernexus.R.id.search)
-                        true
-                    }
-
-                    com.glitch.cybernexus.R.id.favorites -> {
-                        findNavController().navigate(com.glitch.cybernexus.R.id.favorites)
-                        true
-                    }
-
-                    com.glitch.cybernexus.R.id.cart -> {
-                        findNavController().navigate(com.glitch.cybernexus.R.id.cart)
-                        true
-                    }
-
-                    else -> {
-                        false
-                    }
-                }
-            }
-        }*/
+        }
     }
 }

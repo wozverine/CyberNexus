@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/red"
             app:layout_constraintBottom_toTopOf="@id/login_password_til"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,9 +72,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/dark_gray"
-                android:textColor="@color/white"
                 android:hint="@string/email"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/red"
             app:layout_constraintBottom_toTopOf="@id/login_next_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -97,9 +97,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/dark_gray"
-                android:textColor="@color/white"
                 android:hint="@string/password"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
