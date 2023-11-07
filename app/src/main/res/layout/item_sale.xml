@@ -44,7 +44,7 @@
             </RatingBar>
 
             <TextView
-                android:id="@+id/tv_1"
+                android:id="@+id/tv_category_sale"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -55,7 +55,7 @@
                 tools:text="@string/category" />
 
             <TextView
-                android:id="@+id/tv_2"
+                android:id="@+id/tv_product_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -66,7 +66,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_category_sale"
                 tools:text="@string/product_name" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,44 +4,44 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.glitch.cybernexus.data.model.Product
-import com.glitch.cybernexus.databinding.ItemCartBinding
+import com.glitch.cybernexus.databinding.ItemSaleBinding
 
 class SaleAdapter(
     private val onProductClick: (String) -> Unit
 ) : RecyclerView.Adapter<SaleAdapter.SaleViewHolder>() {
 
-    private val noteList = mutableListOf<Product>()
+    private val saleItemList = mutableListOf<Product>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SaleViewHolder {
-        val binding = ItemCartBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemSaleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SaleViewHolder(binding, onProductClick)
     }
 
     override fun onBindViewHolder(holder: SaleViewHolder, position: Int) {
-        holder.bind(noteList[position])
+        holder.bind(saleItemList[position])
     }
 
     override fun getItemCount(): Int {
-        return noteList.size
+        return saleItemList.size
     }
 
     class SaleViewHolder(
-        private val binding: ItemCartBinding, val onProductClick: (String) -> Unit
+        private val binding: ItemSaleBinding, val onProductClick: (String) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(note: Product) {
+        fun bind(sale: Product) {
             with(binding) {
-                tv1.text = note.title
-                tv2.text = note.description
+                tvProductName.text = sale.title
+                tvCategorySale.text = sale.description
 
                 root.setOnClickListener {
-                    onProductClick(note.description)
+                    onProductClick(sale.description)
                 }
             }
         }
     }
 
     fun updateList(list: List<Product>) {
-        noteList.clear()
-        noteList.addAll(list)
+        saleItemList.clear()
+        saleItemList.addAll(list)
         notifyItemRangeChanged(0, list.size)
     }
 }
