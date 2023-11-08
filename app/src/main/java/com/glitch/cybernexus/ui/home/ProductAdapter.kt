@@ -13,15 +13,14 @@ class ProductAdapter(
     private val allProductList = mutableListOf<Product>()
 
     override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ProductAdapter.ProductViewHolder {
+        parent: ViewGroup, viewType: Int
+    ): ProductViewHolder {
         val binding =
             ItemProductHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProductViewHolder(binding, onAllProductClick)
     }
 
-    override fun onBindViewHolder(holder: ProductAdapter.ProductViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         holder.bind(allProductList[position])
     }
 
@@ -37,10 +36,16 @@ class ProductAdapter(
                 tvProductName.text = product.title
                 tvCompany.text = product.company
 
-                root.setOnClickListener{
+                root.setOnClickListener {
                     onAllProductClick(product.company)
                 }
             }
         }
+    }
+
+    fun updateList(list: List<Product>) {
+        allProductList.clear()
+        allProductList.addAll(list)
+        notifyItemRangeChanged(0, list.size)
     }
 }

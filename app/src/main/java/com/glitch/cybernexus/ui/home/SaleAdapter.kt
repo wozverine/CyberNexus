@@ -7,13 +7,13 @@ import com.glitch.cybernexus.data.model.Product
 import com.glitch.cybernexus.databinding.ItemSaleBinding
 
 class SaleAdapter(
-    private val onProductClick: (String) -> Unit
+    private val onSaleClick: (String) -> Unit
 ) : RecyclerView.Adapter<SaleAdapter.SaleViewHolder>() {
 
     private val saleItemList = mutableListOf<Product>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SaleViewHolder {
         val binding = ItemSaleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SaleViewHolder(binding, onProductClick)
+        return SaleViewHolder(binding, onSaleClick)
     }
 
     override fun onBindViewHolder(holder: SaleViewHolder, position: Int) {

@@ -14,11 +14,19 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val saleAdapter = SaleAdapter(
-        onProductClick = ::onProductClick
+        onSaleClick = ::onSaleClick
     )
+
+    private val productAdapter = ProductAdapter(
+        onAllProductClick = ::onProductClick
+    )
+
+    private val categoryAdapter = CategoryAdapter(
+        onCategoryClick = ::onCategoryClick
+    )
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -29,18 +37,26 @@ class HomeFragment : Fragment() {
 
         with(binding) {
             flashSaleRv.adapter = saleAdapter
-            Database.addProduct("sd","ds")
-            Database.addProduct("sd","ds")
-            Database.addProduct("sd","ds")
-            Database.addProduct("sd","ds")
+            allProductsRv.adapter = productAdapter
+            categoriesRv.adapter = categoryAdapter
+            Database.addProduct("product", "description", "company")
+            Database.addProduct("product", "description", "company")
+            Database.addProduct("product", "description", "company")
+            Database.addProduct("product", "description", "company")
+            Database.addProduct("product", "description", "company")
             saleAdapter.updateList(Database.getProduct())
+            productAdapter.updateList(Database.getProduct())
+            Database.addCategory("Fashion")
+            Database.addCategory("Body Enhancement")
+            Database.addCategory("Equipment")
+            Database.addCategory("Android Hardware")
+            categoryAdapter.updateList(Database.getCategory())
         }
     }
 
     private fun onProductClick(desc: String) {
         Toast.makeText(requireContext(), desc, Toast.LENGTH_SHORT).show()
-    }
-    /*private fun showAddDialog() {
+    }/*private fun showAddDialog() {
         val builder = AlertDialog.Builder(requireContext())
         val dialogBinding = DialogAddNoteBinding.inflate(layoutInflater)
         builder.setView(dialogBinding.root)
@@ -66,6 +82,14 @@ class HomeFragment : Fragment() {
         }
         dialog.show()
     }*/
+
+    private fun onSaleClick(desc: String) {
+        Toast.makeText(requireContext(), desc, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun onCategoryClick(desc: String) {
+        Toast.makeText(requireContext(), desc, Toast.LENGTH_SHORT).show()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
