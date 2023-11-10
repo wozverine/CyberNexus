@@ -18,8 +18,7 @@ class CartFragment : Fragment() {
     )
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCartBinding.inflate(inflater, container, false)
         return binding.root
@@ -30,11 +29,66 @@ class CartFragment : Fragment() {
 
         with(binding) {
             cartRv.adapter = cartAdapter
-            Database.addProduct("product", "description", "company")
-            Database.addProduct("product", "description", "company")
-            Database.addProduct("product", "description", "company")
-            Database.addProduct("product", "description", "company")
-            Database.addProduct("product", "description", "company")
+            Database.addProduct(
+                "company product",
+                0.00,
+                "descprition",
+                "category",
+                "imageone",
+                "imagetwo",
+                "imagethree",
+                4.0,
+                5,
+                true
+            )
+            Database.addProduct(
+                "company product",
+                0.00,
+                "descprition",
+                "category",
+                "imageone",
+                "imagetwo",
+                "imagethree",
+                4.0,
+                5,
+                true
+            )
+            Database.addProduct(
+                "company product",
+                0.00,
+                "descprition",
+                "category",
+                "imageone",
+                "imagetwo",
+                "imagethree",
+                4.0,
+                5,
+                true
+            )
+            Database.addProduct(
+                "company product",
+                0.00,
+                "descprition",
+                "category",
+                "imageone",
+                "imagetwo",
+                "imagethree",
+                4.0,
+                5,
+                true
+            )
+            Database.addProduct(
+                "company product",
+                0.00,
+                "descprition",
+                "category",
+                "imageone",
+                "imagetwo",
+                "imagethree",
+                4.0,
+                5,
+                true
+            )
             cartAdapter.updateList(Database.getProduct())
         }
     }

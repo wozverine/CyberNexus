@@ -13,14 +13,14 @@ class FavoriteProductsAdapter(
 
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
-    ): FavoriteProductsAdapter.FavoriteProductsViewHolder {
+    ): FavoriteProductsViewHolder {
         val binding =
             ItemProductHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FavoriteProductsViewHolder(binding, onFavoriteProductClick)
     }
 
     override fun onBindViewHolder(
-        holder: FavoriteProductsAdapter.FavoriteProductsViewHolder, position: Int
+        holder: FavoriteProductsViewHolder, position: Int
     ) {
         holder.bind(allFavoriteProductsList[position])
     }
@@ -34,11 +34,13 @@ class FavoriteProductsAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
             with(binding) {
+                val strList = product.title?.split(" ")
+
                 tvProductName.text = product.title
-                tvCompany.text = product.company
+                tvCompany.text = strList?.get(0)
 
                 root.setOnClickListener {
-                    onFavoriteProductClick(product.company)
+                    product.title?.let { it1 -> onFavoriteProductClick(it1) }
                 }
             }
         }

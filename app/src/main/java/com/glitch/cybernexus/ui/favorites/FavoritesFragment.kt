@@ -38,11 +38,66 @@ class FavoritesFragment : Fragment() {
             Database.addCategory("Equipment")
             Database.addCategory("Android Hardware")
 
-            Database.addProduct("product", "description", "company")
-            Database.addProduct("product", "description", "company")
-            Database.addProduct("product", "description", "company")
-            Database.addProduct("product", "description", "company")
-            Database.addProduct("product", "description", "company")
+            Database.addProduct(
+                "company product",
+                0.00,
+                "descprition",
+                "category",
+                "imageone",
+                "imagetwo",
+                "imagethree",
+                4.0,
+                5,
+                true
+            )
+            Database.addProduct(
+                "company product",
+                0.00,
+                "descprition",
+                "category",
+                "imageone",
+                "imagetwo",
+                "imagethree",
+                4.0,
+                5,
+                true
+            )
+            Database.addProduct(
+                "company product",
+                0.00,
+                "descprition",
+                "category",
+                "imageone",
+                "imagetwo",
+                "imagethree",
+                4.0,
+                5,
+                true
+            )
+            Database.addProduct(
+                "company product",
+                0.00,
+                "descprition",
+                "category",
+                "imageone",
+                "imagetwo",
+                "imagethree",
+                4.0,
+                5,
+                true
+            )
+            Database.addProduct(
+                "company product",
+                0.00,
+                "descprition",
+                "category",
+                "imageone",
+                "imagetwo",
+                "imagethree",
+                4.0,
+                5,
+                true
+            )
             categoryFilterAdapter.updateList(Database.getCategory())
             favoriteProductsAdapter.updateList(Database.getProduct())
         }

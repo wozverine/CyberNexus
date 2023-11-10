@@ -39,11 +39,66 @@ class HomeFragment : Fragment() {
             flashSaleRv.adapter = saleAdapter
             allProductsRv.adapter = productAdapter
             categoriesRv.adapter = categoryAdapter
-            Database.addProduct("product", "description", "company")
-            Database.addProduct("product", "description", "company")
-            Database.addProduct("product", "description", "company")
-            Database.addProduct("product", "description", "company")
-            Database.addProduct("product", "description", "company")
+            Database.addProduct(
+                "company product",
+                0.00,
+                "descprition",
+                "category",
+                "imageone",
+                "imagetwo",
+                "imagethree",
+                4.0,
+                5,
+                true
+            )
+            Database.addProduct(
+                "company product",
+                0.00,
+                "descprition",
+                "category",
+                "imageone",
+                "imagetwo",
+                "imagethree",
+                4.0,
+                5,
+                true
+            )
+            Database.addProduct(
+                "company product",
+                0.00,
+                "descprition",
+                "category",
+                "imageone",
+                "imagetwo",
+                "imagethree",
+                4.0,
+                5,
+                true
+            )
+            Database.addProduct(
+                "company product",
+                0.00,
+                "descprition",
+                "category",
+                "imageone",
+                "imagetwo",
+                "imagethree",
+                4.0,
+                5,
+                true
+            )
+            Database.addProduct(
+                "company product",
+                0.00,
+                "descprition",
+                "category",
+                "imageone",
+                "imagetwo",
+                "imagethree",
+                4.0,
+                5,
+                true
+            )
             saleAdapter.updateList(Database.getProduct())
             productAdapter.updateList(Database.getProduct())
             Database.addCategory("Fashion")

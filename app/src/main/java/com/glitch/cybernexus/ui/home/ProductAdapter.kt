@@ -33,11 +33,13 @@ class ProductAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
             with(binding) {
+                val strList = product.title?.split(" ")
+
                 tvProductName.text = product.title
-                tvCompany.text = product.company
+                tvCompany.text = strList?.get(0)
 
                 root.setOnClickListener {
-                    onAllProductClick(product.company)
+                    product.title?.let { it1 -> onAllProductClick(it1) }
                 }
             }
         }

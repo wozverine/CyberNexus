@@ -11,12 +11,30 @@ object Database {
         return product
     }
 
-    fun addProduct(title: String, description: String, company: String) {
+    fun addProduct(
+        title: String,
+        price: Double,
+        description: String,
+        category: String,
+        imageOne: String,
+        imageTwo: String,
+        imageThree: String,
+        rate: Double,
+        count: Int,
+        saleState: Boolean
+    ) {
         val newProduct = Product(
             id = (product.lastOrNull()?.id ?: 0) + 1,
             title = title,
+            price = price,
             description = description,
-            company = company
+            category = category,
+            imageOne = imageOne,
+            imageTwo = imageTwo,
+            imageThree = imageThree,
+            rate = rate,
+            count = count,
+            saleState = saleState
         )
         product.add(newProduct)
     }
@@ -25,7 +43,7 @@ object Database {
         return category
     }
 
-    fun addCategory(title:String){
+    fun addCategory(title: String) {
         val newCategory = Category(
             title = title
         )

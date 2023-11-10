@@ -10,13 +10,13 @@ class CartAdapter(
     private val onCartClicked: (String) -> Unit
 ) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
     private val cartList = mutableListOf<Product>()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartAdapter.CartViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         val binding =
             ItemProductHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CartViewHolder(binding, onCartClicked)
     }
 
-    override fun onBindViewHolder(holder: CartAdapter.CartViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         holder.bind(cartList[position])
     }
 
@@ -30,11 +30,13 @@ class CartAdapter(
 
         fun bind(product: Product) {
             with(binding) {
+                val strList = product.title?.split(" ")
+
                 tvProductName.text = product.title
-                tvCompany.text = product.company
+                tvCompany.text = strList?.get(0)
 
                 root.setOnClickListener {
-                    onCartClicked(product.company)
+                    product.title?.let { it1 -> onCartClicked(it1) }
                 }
             }
 

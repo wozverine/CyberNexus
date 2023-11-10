@@ -33,7 +33,7 @@ class SaleAdapter(
                 tvCategorySale.text = sale.description
 
                 root.setOnClickListener {
-                    onProductClick(sale.description)
+                    sale.title?.let { it1 -> onProductClick(it1) }
                 }
             }
         }
