@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">CyberNexus</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed nisi iaculis, ullamcorper risus in, egestas ante. Integer a urna eu nisi scelerisque cursus quis a libero. Maecenas congue eros sit amet sem accumsan luctus. Maecenas iaculis nisl ut facilisis consequat. Donec pulvinar ultricies interdum. Suspendisse in eros ipsum. Vestibulum vitae justo rutrum nisl blandit vestibulum sit amet sit amet mi. Morbi lobortis convallis lacus, eu imperdiet ante ultrices sed. In nec sodales mi. Nulla vitae est aliquam, tempor tortor vel, volutpat turpis. Etiam vitae mauris ex.</string>
     <string name="password">Password</string>
     <string name="next">Next</string>
     <string name="signup_long">Don\'t have an account? Sign up.</string>
@@ -20,4 +21,6 @@
     <string name="product_name">Product Name</string>
     <string name="products">Products</string>
     <string name="company">Company Name</string>
+    <string name="price">0.00$</string>
+    <string name="add_to_cart">Add to Cart</string>
 </resources>

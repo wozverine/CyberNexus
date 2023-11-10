@@ -16,10 +16,12 @@ class FavoritesFragment : Fragment() {
     private val categoryFilterAdapter = CategoryFilterAdapter(
         onCategoryFilterClick = ::onCategoryFilterClick
     )
+    private val favoriteProductsAdapter = FavoriteProductsAdapter(
+        onFavoriteProductClick = ::onFavoriteProductClick
+    )
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         return binding.root
@@ -30,11 +32,19 @@ class FavoritesFragment : Fragment() {
 
         with(binding) {
             categoryRv.adapter = categoryFilterAdapter
+            favoritesRv.adapter = favoriteProductsAdapter
             Database.addCategory("Fashion")
             Database.addCategory("Body Enhancement")
             Database.addCategory("Equipment")
             Database.addCategory("Android Hardware")
+
+            Database.addProduct("product", "description", "company")
+            Database.addProduct("product", "description", "company")
+            Database.addProduct("product", "description", "company")
+            Database.addProduct("product", "description", "company")
+            Database.addProduct("product", "description", "company")
             categoryFilterAdapter.updateList(Database.getCategory())
+            favoriteProductsAdapter.updateList(Database.getProduct())
         }
     }
 
@@ -44,6 +54,10 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun onCategoryFilterClick(desc: String) {
+        Toast.makeText(requireContext(), desc, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun onFavoriteProductClick(desc: String) {
         Toast.makeText(requireContext(), desc, Toast.LENGTH_SHORT).show()
     }
 }
