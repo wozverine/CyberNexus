@@ -2,48 +2,55 @@ package com.glitch.cybernexus.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.glitch.cybernexus.data.model.Category
 import com.glitch.cybernexus.databinding.ItemCategoryBinding
 
 class CategoryAdapter(
     private val onCategoryClick: (String) -> Unit
-) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+) : ListAdapter<String, CategoryAdapter.CategoryViewHolder>(CategoryAdapter.CategoryDiffUtilCallBack()) {
+//) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
-    private val allCategoriesList = mutableListOf<Category>()
-    override fun onCreateViewHolder(
-        parent: ViewGroup, viewType: Int
-    ): CategoryViewHolder {
-        val binding =
+    //private val allCategoriesList = mutableListOf<Category>()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
+        return CategoryAdapter.CategoryViewHolder(
+            ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            onCategoryClick
+        )/*val binding =
             ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CategoryViewHolder(binding, onCategoryClick)
+        return CategoryViewHolder(binding, onCategoryClick)*/
     }
 
-    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        holder.bind(allCategoriesList[position])
-    }
+    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) =
+        holder.bind(getItem(position))
 
-    override fun getItemCount(): Int {
+
+    /*override fun getItemCount(): Int {
         return allCategoriesList.size
-    }
+    }*/
 
     class CategoryViewHolder(
-        private val binding: ItemCategoryBinding, val onCategoryClick: (String) -> Unit
+        private val binding: ItemCategoryBinding, private val onCategoryClick: (String) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(category: Category) {
+        fun bind(category: String) {
             with(binding) {
-                categoryTv.text  = category.title
+                categoryTv.text = category
 
-                root.setOnClickListener{
-                    onCategoryClick(category.title)
+                root.setOnClickListener {
+                    onCategoryClick(category)
                 }
             }
         }
     }
 
-    fun updateList(list: List<Category>) {
-        allCategoriesList.clear()
-        allCategoriesList.addAll(list)
-        notifyItemRangeChanged(0, list.size)
+    class CategoryDiffUtilCallBack : DiffUtil.ItemCallback<String>() {
+        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+            return oldItem == newItem
+        }
     }
 }

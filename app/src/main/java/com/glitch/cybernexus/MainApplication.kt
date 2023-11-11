@@ -13,7 +13,7 @@ class MainApplication : Application() {
     companion object {
         private const val BASE_URL = "https://api.canerture.com/ecommerce/"
 
-        private var productService: ProductService? = null
+        var productService: ProductService? = null
 
         fun provideRetrofit(context: Context) {
 
