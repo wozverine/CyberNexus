@@ -44,4 +44,9 @@
         android:name="com.glitch.cybernexus.ui.favorites.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.glitch.cybernexus.ui.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search"/>
 </navigation>

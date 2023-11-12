@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.glitch.cybernexus.MainApplication
 import com.glitch.cybernexus.data.model.GetCategoryListResponse
 import com.glitch.cybernexus.data.model.GetProductsResponse
-import com.glitch.cybernexus.data.source.Database
+import com.glitch.cybernexus.data.model.GetSalesProductsResponse
 import com.glitch.cybernexus.databinding.FragmentHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,78 +44,12 @@ class HomeFragment : Fragment() {
 
         getProducts()
         getCategories()
+        getSalesProducts()
 
         with(binding) {
             flashSaleRv.adapter = saleAdapter
             allProductsRv.adapter = productAdapter
             categoriesRv.adapter = categoryAdapter
-            Database.addProduct(
-                "company product",
-                0.00,
-                "descprition",
-                "category",
-                "imageone",
-                "imagetwo",
-                "imagethree",
-                4.0,
-                5,
-                true
-            )
-            Database.addProduct(
-                "company product",
-                0.00,
-                "descprition",
-                "category",
-                "imageone",
-                "imagetwo",
-                "imagethree",
-                4.0,
-                5,
-                true
-            )
-            Database.addProduct(
-                "company product",
-                0.00,
-                "descprition",
-                "category",
-                "imageone",
-                "imagetwo",
-                "imagethree",
-                4.0,
-                5,
-                true
-            )
-            Database.addProduct(
-                "company product",
-                0.00,
-                "descprition",
-                "category",
-                "imageone",
-                "imagetwo",
-                "imagethree",
-                4.0,
-                5,
-                true
-            )
-            Database.addProduct(
-                "company product",
-                0.00,
-                "descprition",
-                "category",
-                "imageone",
-                "imagetwo",
-                "imagethree",
-                4.0,
-                5,
-                true
-            )
-            saleAdapter.updateList(Database.getProduct())
-            //productAdapter.updateList(Database.getProduct())
-            Database.addCategory("Fashion")
-            Database.addCategory("Body Enhancement")
-            Database.addCategory("Equipment")
-            Database.addCategory("Android Hardware")
-            //categoryAdapter.updateList(Database.getCategory())
         }
     }
 
@@ -167,12 +101,36 @@ class HomeFragment : Fragment() {
             })
     }
 
+    private fun getSalesProducts() {
+        MainApplication.productService?.getSalesProducts()
+            ?.enqueue(object : Callback<GetSalesProductsResponse> {
+
+                override fun onResponse(
+                    call: Call<GetSalesProductsResponse>,
+                    response: Response<GetSalesProductsResponse>
+                ) {
+                    val result = response.body()
+
+                    if (result?.status == 200) {
+                        //Log.e("lister product", result.products.toString())
+                        saleAdapter.submitList(result.products.orEmpty())
+                    } else {
+                        Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<GetSalesProductsResponse>, t: Throwable) {
+                    Log.e("CantGetProducts", t.message.orEmpty())
+                }
+            })
+    }
+
     private fun onProductClick(id: Int) {
         Toast.makeText(requireContext(), id, Toast.LENGTH_SHORT).show()
     }
 
-    private fun onSaleClick(desc: String) {
-        Toast.makeText(requireContext(), desc, Toast.LENGTH_SHORT).show()
+    private fun onSaleClick(id: Int) {
+        Toast.makeText(requireContext(), id, Toast.LENGTH_SHORT).show()
     }
 
     private fun onCategoryClick(desc: String) {

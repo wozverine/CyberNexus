@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> navController.navigate(R.id.homeFragment)
-                //R.id.search -> navController.navigate(R.id.)
+                R.id.search -> navController.navigate(R.id.searchFragment)
                 R.id.favorites -> navController.navigate(R.id.favoritesFragment)
                 R.id.cart -> navController.navigate(R.id.cartFragment)
             }

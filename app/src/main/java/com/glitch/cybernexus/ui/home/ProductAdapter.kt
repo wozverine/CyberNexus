@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.glitch.cybernexus.data.model.Product
 import com.glitch.cybernexus.databinding.ItemProductHomeBinding
 
@@ -80,7 +81,7 @@ class ProductAdapter(
                     append(" ₺")
                 }
 
-                //Glide.with(ivProduct).load(product.imageOne).into(ivProduct)
+                Glide.with(productIv).load(product.imageOne).into(productIv)
 
                 root.setOnClickListener {
                     onProductClick(product.id ?: 1)

@@ -1,13 +1,19 @@
 package com.glitch.cybernexus.ui.favorites
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.glitch.cybernexus.MainApplication
+import com.glitch.cybernexus.data.model.GetCategoryListResponse
 import com.glitch.cybernexus.data.source.Database
 import com.glitch.cybernexus.databinding.FragmentFavoritesBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class FavoritesFragment : Fragment() {
     private var _binding: FragmentFavoritesBinding? = null
@@ -30,13 +36,11 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getCategories()
+
         with(binding) {
             categoryRv.adapter = categoryFilterAdapter
             favoritesRv.adapter = favoriteProductsAdapter
-            Database.addCategory("Fashion")
-            Database.addCategory("Body Enhancement")
-            Database.addCategory("Equipment")
-            Database.addCategory("Android Hardware")
 
             Database.addProduct(
                 "company product",
@@ -98,7 +102,7 @@ class FavoritesFragment : Fragment() {
                 5,
                 true
             )
-            categoryFilterAdapter.updateList(Database.getCategory())
+            //categoryFilterAdapter.updateList(Database.getCategory())
             favoriteProductsAdapter.updateList(Database.getProduct())
         }
     }
@@ -114,5 +118,29 @@ class FavoritesFragment : Fragment() {
 
     private fun onFavoriteProductClick(desc: String) {
         Toast.makeText(requireContext(), desc, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun getCategories() {
+        MainApplication.productService?.getCategories()
+            ?.enqueue(object : Callback<GetCategoryListResponse> {
+
+                override fun onResponse(
+                    call: Call<GetCategoryListResponse>,
+                    response: Response<GetCategoryListResponse>
+                ) {
+                    val result = response.body()
+
+                    if (result?.status == 200) {
+                        //Log.e("lister category", result.categories.toString())
+                        categoryFilterAdapter.submitList(result.categories.orEmpty())
+                    } else {
+                        Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<GetCategoryListResponse>, t: Throwable) {
+                    Log.e("CantGetCategories", t.message.orEmpty())
+                }
+            })
     }
 }
