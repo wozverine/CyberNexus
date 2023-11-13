@@ -7,7 +7,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.glitch.cybernexus.MainApplication
 import com.glitch.cybernexus.R
 import com.glitch.cybernexus.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        MainApplication.provideRetrofit(this)
+        //MainApplication.provideRetrofit(this)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment

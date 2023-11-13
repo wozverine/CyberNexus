@@ -21,18 +21,17 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideChuckerInterceptor(@ApplicationContext context: Context) = ChuckerInterceptor.Builder(context).build()
+    fun provideChuckerInterceptor(@ApplicationContext context: Context) =
+        ChuckerInterceptor.Builder(context).build()
 
     @Singleton
     @Provides
     fun provideOkHttp(chucker: ChuckerInterceptor) = OkHttpClient.Builder().apply {
-        addInterceptor(
-            Interceptor { chain ->
-                val builder = chain.request().newBuilder()
-                builder.header("store", "canerture")
-                return@Interceptor chain.proceed(builder.build())
-            }
-        )
+        addInterceptor(Interceptor { chain ->
+            val builder = chain.request().newBuilder()
+            builder.header("store", "CyberNexus")
+            return@Interceptor chain.proceed(builder.build())
+        })
         addInterceptor(chucker)
     }.build()
 

@@ -6,47 +6,56 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.glitch.cybernexus.data.model.response.Product
+import com.glitch.cybernexus.data.model.response.ProductUI
 import com.glitch.cybernexus.databinding.ItemSaleBinding
 
 class SaleAdapter(
-    private val onSaleClick: (Int) -> Unit
-) : ListAdapter<Product, SaleAdapter.SaleViewHolder>(SalesDiffUtilCallBack()) {
+    private val onSaleClick: (Int) -> Unit,
+    private val onFavProductClick: (ProductUI) -> Unit
+) : ListAdapter<ProductUI, SaleAdapter.SaleViewHolder>(SalesDiffUtilCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SaleAdapter.SaleViewHolder {
         return SaleAdapter.SaleViewHolder(
             ItemSaleBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            onSaleClick
+            onSaleClick,
+            onFavProductClick
         )
     }
 
-    override fun onBindViewHolder(holder: SaleViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SaleViewHolder, position: Int) =
         holder.bind(getItem(position))
-    }
+
 
     class SaleViewHolder(
-        private val binding: ItemSaleBinding, private val onProductClick: (Int) -> Unit
+        private val binding: ItemSaleBinding,
+        private val onProductClick: (Int) -> Unit,
+        private val onFavProductClick: (ProductUI) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(sale: Product) {
+        fun bind(product: ProductUI) {
             with(binding) {
-                tvProductName.text = sale.title
-                tvCategorySale.text = sale.category
+                tvProductName.text = product.title
+                tvCategorySale.text = product.category
+                /*tvPrice.text = "${product.price} ₺"
+                tvSalePrice.text = "${product.salePrice} ₺"*/
 
-                Glide.with(productIv).load(sale.imageOne).into(productIv)
+                Glide.with(productIv).load(product.imageOne).into(productIv)
 
                 root.setOnClickListener {
-                    onProductClick(sale.id ?: 1)
+                    onProductClick(product.id)
                 }
+                /*ivSaleFavorite.setOnClickListener {
+                    onFavClick(product)
+                }*/
             }
         }
     }
 
-    class SalesDiffUtilCallBack : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+    class SalesDiffUtilCallBack : DiffUtil.ItemCallback<ProductUI>() {
+        override fun areItemsTheSame(oldItem: ProductUI, newItem: ProductUI): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+        override fun areContentsTheSame(oldItem: ProductUI, newItem: ProductUI): Boolean {
             return oldItem == newItem
         }
     }

@@ -26,6 +26,7 @@
                 android:id="@+id/product_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="5sp"
                 android:background="@drawable/social_facebook"
                 android:contentDescription="@string/products"
                 app:layout_constraintEnd_toStartOf="@id/tv_product_name"
