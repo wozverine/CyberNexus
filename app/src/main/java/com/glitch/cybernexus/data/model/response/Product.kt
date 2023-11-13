@@ -1,4 +1,4 @@
-package com.glitch.cybernexus.data.model
+package com.glitch.cybernexus.data.model.response
 
 data class Product(
     val id: Int?,
@@ -12,4 +12,6 @@ data class Product(
     val rate: Double?,
     val count: Int?,
     val saleState: Boolean?,
+    val salePrice: Double,
+    val isFav: Boolean = false
 )

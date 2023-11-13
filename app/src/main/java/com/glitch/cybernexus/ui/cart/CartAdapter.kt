@@ -3,7 +3,7 @@ package com.glitch.cybernexus.ui.cart
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.glitch.cybernexus.data.model.Product
+import com.glitch.cybernexus.data.model.response.Product
 import com.glitch.cybernexus.databinding.ItemProductHomeBinding
 
 class CartAdapter(

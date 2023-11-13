@@ -1,7 +1,7 @@
 package com.glitch.cybernexus.data.source
 
-import com.glitch.cybernexus.data.model.Category
-import com.glitch.cybernexus.data.model.Product
+import com.glitch.cybernexus.data.model.response.Category
+import com.glitch.cybernexus.data.model.response.Product
 
 object Database {
     private val product = mutableListOf<Product>()
@@ -21,7 +21,8 @@ object Database {
         imageThree: String,
         rate: Double,
         count: Int,
-        saleState: Boolean
+        saleState: Boolean,
+        salePrice: Double
     ) {
         val newProduct = Product(
             id = (product.lastOrNull()?.id ?: 0) + 1,
@@ -34,7 +35,8 @@ object Database {
             imageThree = imageThree,
             rate = rate,
             count = count,
-            saleState = saleState
+            saleState = saleState,
+            salePrice = salePrice
         )
         product.add(newProduct)
     }

@@ -1,19 +1,13 @@
 package com.glitch.cybernexus.ui.favorites
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.glitch.cybernexus.MainApplication
-import com.glitch.cybernexus.data.model.GetCategoryListResponse
 import com.glitch.cybernexus.data.source.Database
 import com.glitch.cybernexus.databinding.FragmentFavoritesBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class FavoritesFragment : Fragment() {
     private var _binding: FragmentFavoritesBinding? = null
@@ -36,7 +30,7 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getCategories()
+        //getCategories()
 
         with(binding) {
             categoryRv.adapter = categoryFilterAdapter
@@ -52,7 +46,8 @@ class FavoritesFragment : Fragment() {
                 "imagethree",
                 4.0,
                 5,
-                true
+                true,
+                45.0
             )
             Database.addProduct(
                 "company product",
@@ -64,7 +59,8 @@ class FavoritesFragment : Fragment() {
                 "imagethree",
                 4.0,
                 5,
-                true
+                true,
+                45.0
             )
             Database.addProduct(
                 "company product",
@@ -76,7 +72,8 @@ class FavoritesFragment : Fragment() {
                 "imagethree",
                 4.0,
                 5,
-                true
+                true,
+                45.0
             )
             Database.addProduct(
                 "company product",
@@ -88,7 +85,8 @@ class FavoritesFragment : Fragment() {
                 "imagethree",
                 4.0,
                 5,
-                true
+                true,
+                45.0
             )
             Database.addProduct(
                 "company product",
@@ -100,7 +98,8 @@ class FavoritesFragment : Fragment() {
                 "imagethree",
                 4.0,
                 5,
-                true
+                true,
+                45.0
             )
             //categoryFilterAdapter.updateList(Database.getCategory())
             favoriteProductsAdapter.updateList(Database.getProduct())
@@ -120,7 +119,7 @@ class FavoritesFragment : Fragment() {
         Toast.makeText(requireContext(), desc, Toast.LENGTH_SHORT).show()
     }
 
-    private fun getCategories() {
+    /*private fun getCategories() {
         MainApplication.productService?.getCategories()
             ?.enqueue(object : Callback<GetCategoryListResponse> {
 
@@ -142,5 +141,6 @@ class FavoritesFragment : Fragment() {
                     Log.e("CantGetCategories", t.message.orEmpty())
                 }
             })
-    }
+    }*/
+
 }

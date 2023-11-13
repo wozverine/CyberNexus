@@ -39,7 +39,8 @@ class CartFragment : Fragment() {
                 "imagethree",
                 4.0,
                 5,
-                true
+                true,
+                45.0
             )
             Database.addProduct(
                 "company product",
@@ -51,7 +52,8 @@ class CartFragment : Fragment() {
                 "imagethree",
                 4.0,
                 5,
-                true
+                true,
+                45.0
             )
             Database.addProduct(
                 "company product",
@@ -63,7 +65,8 @@ class CartFragment : Fragment() {
                 "imagethree",
                 4.0,
                 5,
-                true
+                true,
+                45.0
             )
             Database.addProduct(
                 "company product",
@@ -75,7 +78,8 @@ class CartFragment : Fragment() {
                 "imagethree",
                 4.0,
                 5,
-                true
+                true,
+                45.0
             )
             Database.addProduct(
                 "company product",
@@ -87,7 +91,8 @@ class CartFragment : Fragment() {
                 "imagethree",
                 4.0,
                 5,
-                true
+                true,
+                45.0
             )
             cartAdapter.updateList(Database.getProduct())
         }

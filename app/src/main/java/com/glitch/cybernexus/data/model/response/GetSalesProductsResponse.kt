@@ -1,4 +1,4 @@
-package com.glitch.cybernexus.data.model
+package com.glitch.cybernexus.data.model.response
 
 data class GetSalesProductsResponse(
     val products: List<Product>?,

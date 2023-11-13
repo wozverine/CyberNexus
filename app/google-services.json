@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "467101363758",
+    "project_id": "cybernexus-47324",
+    "storage_bucket": "cybernexus-47324.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:467101363758:android:45e4045f2fcb21096339bf",
+        "android_client_info": {
+          "package_name": "com.glitch.cybernexus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJyGpeq7KfYedZ46VA39PZiAIxg4E4yzI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

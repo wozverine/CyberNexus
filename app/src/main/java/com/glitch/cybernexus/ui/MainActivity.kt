@@ -10,8 +10,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.glitch.cybernexus.MainApplication
 import com.glitch.cybernexus.R
 import com.glitch.cybernexus.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding

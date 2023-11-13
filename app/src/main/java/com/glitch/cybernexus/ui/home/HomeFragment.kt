@@ -1,31 +1,32 @@
 package com.glitch.cybernexus.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.glitch.cybernexus.MainApplication
-import com.glitch.cybernexus.data.model.GetCategoryListResponse
-import com.glitch.cybernexus.data.model.GetProductsResponse
-import com.glitch.cybernexus.data.model.GetSalesProductsResponse
+import androidx.fragment.app.viewModels
+import com.glitch.cybernexus.common.gone
+import com.glitch.cybernexus.common.visible
+import com.glitch.cybernexus.data.model.response.ProductUI
 import com.glitch.cybernexus.databinding.FragmentHomeBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private val viewModel by viewModels<HomeViewModel>()
 
     private val saleAdapter = SaleAdapter(
         onSaleClick = ::onSaleClick
     )
 
     private val productAdapter = ProductAdapter(
-        onAllProductClick = ::onProductClick
+        onAllProductClick = ::onProductClick,
+        onFavProductClick = ::onFavProductClick
     )
 
     private val categoryAdapter = CategoryAdapter(
@@ -42,18 +43,44 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getProducts()
-        getCategories()
-        getSalesProducts()
+        viewModel.getProducts()
+        //getCategories()
+        //getSalesProducts()
 
         with(binding) {
-            flashSaleRv.adapter = saleAdapter
+            //flashSaleRv.adapter = saleAdapter
             allProductsRv.adapter = productAdapter
-            categoriesRv.adapter = categoryAdapter
+            //categoriesRv.adapter = categoryAdapter
         }
+        observeData()
     }
 
-    private fun getCategories() {
+
+    private fun observeData() = with(binding) {
+        viewModel.homeState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                HomeState.Loading -> progressBar.visible()
+
+                is HomeState.SuccessState -> {
+                    progressBar.gone()
+                    productAdapter.submitList(state.products)
+                }
+
+                is HomeState.EmptyScreen -> {
+                    progressBar.gone()
+                    ivEmpty.visible()
+                    tvEmpty.visible()
+                    tvEmpty.text = state.failMessage
+                }
+
+                is HomeState.ShowPopUp -> {
+                    progressBar.gone()
+                    Snackbar.make(requireView(), state.errorMessage, 1000).show()
+                }
+            }
+        }
+    }
+    /*private fun getCategories() {
         MainApplication.productService?.getCategories()
             ?.enqueue(object : Callback<GetCategoryListResponse> {
 
@@ -123,7 +150,7 @@ class HomeFragment : Fragment() {
                     Log.e("CantGetProducts", t.message.orEmpty())
                 }
             })
-    }
+    }*/
 
     private fun onProductClick(id: Int) {
         Toast.makeText(requireContext(), id, Toast.LENGTH_SHORT).show()
@@ -135,6 +162,11 @@ class HomeFragment : Fragment() {
 
     private fun onCategoryClick(desc: String) {
         Toast.makeText(requireContext(), desc, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun onFavProductClick(product: ProductUI) {
+        Toast.makeText(requireContext(), product.title, Toast.LENGTH_SHORT).show()
+        //viewModel.setFavoriteState(product)
     }
 
     override fun onDestroyView() {

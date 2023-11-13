@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.glitch.cybernexus.data.model.Product
+import com.glitch.cybernexus.data.model.response.ProductUI
 import com.glitch.cybernexus.databinding.ItemProductHomeBinding
 
 /*class ProductAdapter(
@@ -56,13 +56,15 @@ import com.glitch.cybernexus.databinding.ItemProductHomeBinding
 }*/
 
 class ProductAdapter(
-    private val onAllProductClick: (Int) -> Unit
-) : ListAdapter<Product, ProductAdapter.ProductViewHolder>(ProductDiffUtilCallBack()) {
+    private val onAllProductClick: (Int) -> Unit,
+    private val onFavProductClick: (ProductUI) -> Unit
+) : ListAdapter<ProductUI, ProductAdapter.ProductViewHolder>(ProductDiffUtilCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         return ProductViewHolder(
             ItemProductHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            onAllProductClick
+            onAllProductClick,
+            onFavProductClick
         )
     }
 
@@ -70,32 +72,42 @@ class ProductAdapter(
         holder.bind(getItem(position))
 
     class ProductViewHolder(
-        private val binding: ItemProductHomeBinding, private val onProductClick: (Int) -> Unit
+        private val binding: ItemProductHomeBinding,
+        private val onProductClick: (Int) -> Unit,
+        private val onFavClick: (ProductUI) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(product: Product) {
+        fun bind(product: ProductUI) {
             with(binding) {
                 tvProductName.text = product.title
                 tvCompany.text = buildString {
                     append(product.price)
                     append(" ₺")
                 }
+                /*ivFavorite.setBackgroundResource(
+                    if (product.isFav) R.drawable.ic_fav_selected
+                    else R.drawable.ic_fav_unselected
+                )*/
 
                 Glide.with(productIv).load(product.imageOne).into(productIv)
 
                 root.setOnClickListener {
                     onProductClick(product.id ?: 1)
                 }
+
+                /*ivFavorite.setOnClickListener {
+                    onFavProductClick(product)
+                }*/
             }
         }
     }
 
-    class ProductDiffUtilCallBack : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+    class ProductDiffUtilCallBack : DiffUtil.ItemCallback<ProductUI>() {
+        override fun areItemsTheSame(oldItem: ProductUI, newItem: ProductUI): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+        override fun areContentsTheSame(oldItem: ProductUI, newItem: ProductUI): Boolean {
             return oldItem == newItem
         }
     }
