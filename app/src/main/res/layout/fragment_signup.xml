@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/login_title_tv"
+        android:id="@+id/signup_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30sp"
@@ -57,13 +57,13 @@
         app:layout_constraintTop_toBottomOf="@id/iv_ellipse_1">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_name_til"
+            android:id="@+id/signup_name_til"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="10dp"
             android:textColorHint="@color/red"
-            app:layout_constraintBottom_toTopOf="@id/login_password_til"
+            app:layout_constraintBottom_toTopOf="@id/signup_password_til"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -71,7 +71,7 @@
             app:startIconDrawable="@drawable/icon_person">
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/etMailLogin"
+                android:id="@+id/etMailSignIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/dark_gray"
@@ -81,22 +81,22 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_password_til"
+            android:id="@+id/signup_password_til"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:textColorHint="@color/red"
-            app:layout_constraintBottom_toTopOf="@id/login_next_btn"
+            app:layout_constraintBottom_toTopOf="@id/signup_next_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_name_til"
+            app:layout_constraintTop_toBottomOf="@+id/signup_name_til"
             app:layout_constraintVertical_chainStyle="packed"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@color/purple_1"
             app:startIconDrawable="@drawable/icon_lock">
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/etPasswordLogin"
+                android:id="@+id/etPasswordSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/dark_gray"
@@ -106,7 +106,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/login_next_btn"
+            android:id="@+id/signup_next_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="30sp"
@@ -115,14 +115,14 @@
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_password_til"
+            app:layout_constraintTop_toBottomOf="@+id/signup_password_til"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintWidth_percent="0.4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/login_tv"
+        android:id="@+id/signup_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20sp"

@@ -24,7 +24,16 @@
             android:layout_height="wrap_content"
             android:background="@drawable/social_facebook"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/btn_fav"
+            android:background="@drawable/icon_fav_unselected"
+            app:layout_constraintBottom_toBottomOf="@id/product_iv"
+            app:layout_constraintEnd_toEndOf="@id/product_iv"/>
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -34,7 +43,6 @@
             android:isIndicator="true"
             android:numStars="5"
             android:stepSize="0.1"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_iv" />
 

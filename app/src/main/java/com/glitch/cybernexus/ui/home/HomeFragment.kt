@@ -108,7 +108,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun onSaleClick(id: Int) {
-        Toast.makeText(requireContext(), id, Toast.LENGTH_SHORT).show()
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(id))
     }
 
     private fun onFavProductClick(product: ProductUI) {

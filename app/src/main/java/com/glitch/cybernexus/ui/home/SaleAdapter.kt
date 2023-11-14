@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.glitch.cybernexus.R
 import com.glitch.cybernexus.common.strike
 import com.glitch.cybernexus.data.model.response.ProductUI
 import com.glitch.cybernexus.databinding.ItemSaleBinding
@@ -44,6 +45,16 @@ class SaleAdapter(
                     append(product.salePrice)
                     append(" ₺")
                 }
+
+                btnFav.setBackgroundResource(
+                    if (product.isFav) {
+                        R.drawable.icon_fav_selected
+                    } else {
+                        R.drawable.icon_fav_unselected
+                    }
+                )
+                
+                ratingBar.rating = (product.rate).toFloat()
 
                 Glide.with(productIv).load(product.imageOne).into(productIv)
 

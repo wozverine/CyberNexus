@@ -56,27 +56,30 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                     progressBar.gone()
                     ratingBar.visible()
                     imageSlider.visible()
-                    //ivFav.visible()
+                    btnFav.visible()
 
-                    tvProductName.text = state.product.title
-                    tvPrice.text = "${state.product.price}"
+                    //tvProductName.text = state.product.title
                     tvDetails.text = state.product.description
                     ratingBar.rating = state.product.rate.toFloat()
                     //tvCategory.text = state.product.category
+                    val strList = state.product.title?.split(" ")
+                    tvProductName.text = strList?.subList(1,strList.size)?.joinToString ()
+                    tvCompany.text = strList?.get(0)
 
-                    /*if (!state.product.saleState) {
-                        tvSalePrice.gone()
+                    if (!state.product.saleState) {
+                        tvPrice.text = "${state.product.price}"
                     } else {
-                        tvSalePrice.text = "${state.product.salePrice}"
-                    }*/
+                        tvPrice.text = "${state.product.salePrice}"
+                    }
 
-                    /*ivFav.setBackgroundResource(
+                    btnFav.setImageResource(
                         if (state.product.isFav) {
-                            R.drawable.ic_fav_selected
-                        } else {
-                            R.drawable.ic_fav_unselected
-                        }
-                    )*/
+                        R.drawable.icon_fav_selected
+                    } else {
+                        R.drawable.icon_fav_unselected
+                    }
+
+                    )
                     Log.v("aaaaaaaaaaaaaaaa",state.product.title)
                 }
 

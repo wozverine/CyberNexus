@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.glitch.cybernexus.R
 import com.glitch.cybernexus.data.model.response.ProductUI
 import com.glitch.cybernexus.databinding.ItemProductHomeBinding
 
@@ -33,10 +34,6 @@ class ProductAdapter(
 
         fun bind(product: ProductUI) {
             with(binding) {
-                /*val strList = product.title?.split(" ")
-                tvProductName.text = strList?.subList(1,strList.size)?.joinToString ()
-                tvCompany.text = strList?.get(0)*/
-
                 tvProductName.text = product.title
                 tvCategory.text = product.category
 
@@ -49,6 +46,16 @@ class ProductAdapter(
                     }
                     append(" ₺")
                 }
+
+                btnFav.setBackgroundResource(
+                    if (product.isFav) {
+                        R.drawable.icon_fav_selected
+                    } else {
+                        R.drawable.icon_fav_unselected
+                    }
+                )
+
+                ratingBar.rating = (product.rate).toFloat()
 
                 Glide.with(productIv).load(product.imageOne).into(productIv)
 

@@ -31,12 +31,12 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            loginNextBtn.setOnClickListener() {
+            signupNextBtn.setOnClickListener() {
                 findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
             }
             spannableText(
                 getString(R.string.login),
-                loginTv,
+                signupTv,
                 R.id.action_signUpFragment_to_signInFragment
             )
         }

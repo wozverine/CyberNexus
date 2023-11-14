@@ -31,11 +31,15 @@ class SearchAdapter(
             with(binding) {
                 tvProductName.text = product.title
 
-                /*if(!product.saleState) {
-                    tvPrice.text = "${product.price} ₺"
-                } else {
-                    tvPrice.text = "${product.salePrice} ₺"
-                }*/
+                tvPrice.text = buildString {
+                    if (product.saleState) {
+                        append("FLASH SALE: ")
+                        append(product.salePrice)
+                    } else {
+                        append(product.price)
+                    }
+                    append(" ₺")
+                }
 
                 ratingBar.rating = (product.rate).toFloat()
 

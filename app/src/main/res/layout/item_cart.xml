@@ -56,7 +56,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/product_iv"
                 app:layout_constraintTop_toBottomOf="@id/tv_product_name"
-                tools:text="@string/category" />
+                tools:text="@string/company" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
@@ -83,11 +83,20 @@
             <ImageButton
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:id="@+id/btn_fav"
-                android:background="@drawable/icon_fav_unselected"
+                android:background="@drawable/icon_delete"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/tv_category"
                 app:layout_constraintTop_toTopOf="@id/ratingBar"/>
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/btn_delete"
+                android:background="@drawable/icon_delete"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/tv_category"
+                app:layout_constraintTop_toTopOf="@id/ratingBar"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

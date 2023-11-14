@@ -32,7 +32,7 @@ class SignInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            loginNextBtn.setOnClickListener() {
+            signinNextBtn.setOnClickListener() {
                 findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
             }
             spannableText(

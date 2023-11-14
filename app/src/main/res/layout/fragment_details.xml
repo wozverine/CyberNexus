@@ -6,34 +6,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="10sp">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/icon_cart"
-        android:id="@+id/btn_back"
+    <LinearLayout
+        android:id="@+id/layout_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="4sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_company"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-    </Button>
 
-    <ImageView
-        android:id="@+id/image_slider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/social_facebook"
-        app:layout_constraintTop_toBottomOf="@id/btn_back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:background="@drawable/icon_back"/>
+
+        <ImageView
+            android:id="@+id/image_slider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/artificial" />
+    </LinearLayout>
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/btn_fav"
+        android:background="@drawable/icon_fav_unselected"
+        app:layout_constraintEnd_toEndOf="@id/layout_buttons"
+        app:layout_constraintBottom_toBottomOf="@id/layout_buttons"/>
 
     <TextView
-        android:id="@+id/tv_category"
+        android:id="@+id/tv_company"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/company"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_slider" />
+        app:layout_constraintBottom_toTopOf="@id/tv_price"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_price"
@@ -44,7 +58,7 @@
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_slider" />
+        app:layout_constraintTop_toTopOf="@id/tv_product_name" />
 
     <TextView
         android:id="@+id/tv_product_name"
@@ -85,6 +99,7 @@
         android:text="@string/add_to_cart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_details" />
 
     <ImageView
