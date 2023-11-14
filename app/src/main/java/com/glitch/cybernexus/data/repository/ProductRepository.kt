@@ -16,40 +16,37 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class ProductRepository(
-    private val productService: ProductService,
-    private val productDao: ProductDao
+    private val productService: ProductService, private val productDao: ProductDao
 ) {
-    suspend fun getProducts(): Resource<List<ProductUI>> =
-        withContext(Dispatchers.IO) {
-            try {
-                val favorites = productDao.getProductIds()
-                val response = productService.getProducts().body()
+    suspend fun getProducts(): Resource<List<ProductUI>> = withContext(Dispatchers.IO) {
+        try {
+            val favorites = productDao.getProductIds()
+            val response = productService.getProducts().body()
 
-                if (response?.status == 200) {
-                    Resource.Success(response.products.orEmpty().mapProductToProductUI(favorites))
-                } else {
-                    Resource.Fail(response?.message.orEmpty())
-                }
-            } catch (e: Exception) {
-                Resource.Error(e.message.orEmpty())
+            if (response?.status == 200) {
+                Resource.Success(response.products.orEmpty().mapProductToProductUI(favorites))
+            } else {
+                Resource.Fail(response?.message.orEmpty())
             }
+        } catch (e: Exception) {
+            Resource.Error(e.message.orEmpty())
         }
+    }
 
-    suspend fun getProductDetail(id: Int): Resource<ProductUI> =
-        withContext(Dispatchers.IO) {
-            try {
-                val favorites = productDao.getProductIds()
-                val response = productService.getProductDetail(id).body()
+    suspend fun getProductDetail(id: Int): Resource<ProductUI> = withContext(Dispatchers.IO) {
+        try {
+            val favorites = productDao.getProductIds()
+            val response = productService.getProductDetail(id).body()
 
-                if (response?.status == 200 && response.product != null) {
-                    Resource.Success(response.product.mapToProductUI(favorites))
-                } else {
-                    Resource.Fail(response?.message.orEmpty())
-                }
-            } catch (e: Exception) {
-                Resource.Error(e.message.orEmpty())
+            if (response?.status == 200 && response.product != null) {
+                Resource.Success(response.product.mapToProductUI(favorites))
+            } else {
+                Resource.Fail(response?.message.orEmpty())
             }
+        } catch (e: Exception) {
+            Resource.Error(e.message.orEmpty())
         }
+    }
 
     suspend fun getProductsByCategory(category: String): Resource<List<ProductUI>> =
         withContext(Dispatchers.IO) {
@@ -75,40 +72,38 @@ class ProductRepository(
         productDao.deleteProduct(productUI.mapToProductEntity())
     }
 
-    suspend fun getFavorites(): Resource<List<ProductUI>> =
-        withContext(Dispatchers.IO) {
-            try {
-                val products = productDao.getProducts()
+    suspend fun getFavorites(): Resource<List<ProductUI>> = withContext(Dispatchers.IO) {
+        try {
+            val products = productDao.getProducts()
 
-                if (products.isEmpty()) {
-                    Resource.Fail("Products not found")
-                } else {
-                    Resource.Success(products.mapProductEntityToProductUI())
-                }
-            } catch (e: Exception) {
-                Resource.Error(e.message.orEmpty())
+            if (products.isEmpty()) {
+                Resource.Fail("Products not found")
+            } else {
+                Resource.Success(products.mapProductEntityToProductUI())
             }
+        } catch (e: Exception) {
+            Resource.Error(e.message.orEmpty())
         }
+    }
 
     suspend fun clearFavorites() {
         productDao.clearFavorites()
     }
 
-    suspend fun getSaleProducts(): Resource<List<ProductUI>> =
-        withContext(Dispatchers.IO) {
-            try {
-                val favorites = productDao.getProductIds()
-                val response = productService.getSaleProducts().body()
+    suspend fun getSaleProducts(): Resource<List<ProductUI>> = withContext(Dispatchers.IO) {
+        try {
+            val favorites = productDao.getProductIds()
+            val response = productService.getSaleProducts().body()
 
-                if (response?.status == 200) {
-                    Resource.Success(response.products.orEmpty().mapProductToProductUI(favorites))
-                } else {
-                    Resource.Fail(response?.message.orEmpty())
-                }
-            } catch (e: Exception) {
-                Resource.Error("Something went wrong")
+            if (response?.status == 200) {
+                Resource.Success(response.products.orEmpty().mapProductToProductUI(favorites))
+            } else {
+                Resource.Fail(response?.message.orEmpty())
             }
+        } catch (e: Exception) {
+            Resource.Error("Something went wrong")
         }
+    }
 
     suspend fun searchProduct(query: String): Resource<List<ProductUI>> =
         withContext(Dispatchers.IO) {
@@ -173,22 +168,18 @@ class ProductRepository(
             }
         }
 
-    suspend fun clearCart(userId: String): Resource<BaseResponse> =
-        withContext(Dispatchers.IO) {
-            try {
-                val response = productService.clearCart(ClearCartRequest(userId)).body()
-                if (response?.status == 200) {
-                    Resource.Success(response)
-                } else {
-                    Resource.Fail(response?.message.orEmpty())
-                }
-            } catch (e: Exception) {
-                Resource.Error(e.message.orEmpty())
+    suspend fun clearCart(userId: String): Resource<BaseResponse> = withContext(Dispatchers.IO) {
+        try {
+            val response = productService.clearCart(ClearCartRequest(userId)).body()
+            if (response?.status == 200) {
+                Resource.Success(response)
+            } else {
+                Resource.Fail(response?.message.orEmpty())
             }
+        } catch (e: Exception) {
+            Resource.Error(e.message.orEmpty())
         }
-
-
-
+    }
 
 
 }

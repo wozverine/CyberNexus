@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.glitch.cybernexus.common.strike
 import com.glitch.cybernexus.data.model.response.ProductUI
 import com.glitch.cybernexus.databinding.ItemSaleBinding
 
 class SaleAdapter(
-    private val onSaleClick: (Int) -> Unit,
-    private val onFavProductClick: (ProductUI) -> Unit
+    private val onSaleClick: (Int) -> Unit, private val onFavProductClick: (ProductUI) -> Unit
 ) : ListAdapter<ProductUI, SaleAdapter.SaleViewHolder>(SalesDiffUtilCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SaleAdapter.SaleViewHolder {
@@ -35,17 +35,21 @@ class SaleAdapter(
             with(binding) {
                 tvProductName.text = product.title
                 tvCategorySale.text = product.category
-                /*tvPrice.text = "${product.price} ₺"
-                tvSalePrice.text = "${product.salePrice} ₺"*/
+                tvPrice.text = buildString {
+                    append(product.price)
+                    append(" ₺")
+                }
+                tvPrice.strike = true
+                tvSalePrice.text = buildString {
+                    append(product.salePrice)
+                    append(" ₺")
+                }
 
                 Glide.with(productIv).load(product.imageOne).into(productIv)
 
                 root.setOnClickListener {
                     onProductClick(product.id)
                 }
-                /*ivSaleFavorite.setOnClickListener {
-                    onFavClick(product)
-                }*/
             }
         }
     }

@@ -9,7 +9,7 @@
         android:id="@+id/signInFragment"
         android:name="com.glitch.cybernexus.ui.signin.SignInFragment"
         android:label="fragment_signin"
-        tools:layout="@layout/fragment_signin" >
+        tools:layout="@layout/fragment_signin">
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
@@ -17,11 +17,12 @@
             android:id="@+id/action_signInFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.glitch.cybernexus.ui.signup.SignUpFragment"
         android:label="fragment_signup"
-        tools:layout="@layout/fragment_signup" >
+        tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_signUpFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -29,11 +30,17 @@
             android:id="@+id/action_signUpFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.glitch.cybernexus.ui.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.glitch.cybernexus.ui.cart.CartFragment"
@@ -48,5 +55,18 @@
         android:id="@+id/searchFragment"
         android:name="com.glitch.cybernexus.ui.search.SearchFragment"
         android:label="SearchFragment"
-        tools:layout="@layout/fragment_search"/>
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.glitch.cybernexus.ui.details.DetailsFragment"
+        android:label="DetailsFragment"
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

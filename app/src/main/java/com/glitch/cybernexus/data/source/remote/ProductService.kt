@@ -19,13 +19,13 @@ interface ProductService {
     suspend fun getProducts(): Response<GetProductsResponse>
 
     @GET("get_categories.php")
-    fun getCategories(): Response<GetCategoryListResponse>
+    suspend fun getCategories(): Response<GetCategoryListResponse>
 
     @GET("get_sale_products.php")
     suspend fun getSaleProducts(): Response<GetProductsResponse>
 
     @GET("get_product_detail.php")
-    fun getProductDetail(
+    suspend fun getProductDetail(
         @Query("id") id: Int
     ): Response<GetProductDetailResponse>
 
@@ -51,7 +51,7 @@ interface ProductService {
 
     @GET("search_product.php")
     suspend fun searchProduct(
-        @Query("query") query : String
+        @Query("query") query: String
     ): Response<GetProductsResponse>
 
     @GET("get_products_by_category.php")

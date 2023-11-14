@@ -9,9 +9,9 @@ import com.bumptech.glide.Glide
 import com.glitch.cybernexus.data.model.response.ProductUI
 import com.glitch.cybernexus.databinding.ItemProductHomeBinding
 
+
 class ProductAdapter(
-    private val onAllProductClick: (Int) -> Unit,
-    private val onFavProductClick: (ProductUI) -> Unit
+    private val onAllProductClick: (Int) -> Unit, private val onFavProductClick: (ProductUI) -> Unit
 ) : ListAdapter<ProductUI, ProductAdapter.ProductViewHolder>(ProductDiffUtilCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -33,25 +33,28 @@ class ProductAdapter(
 
         fun bind(product: ProductUI) {
             with(binding) {
+                /*val strList = product.title?.split(" ")
+                tvProductName.text = strList?.subList(1,strList.size)?.joinToString ()
+                tvCompany.text = strList?.get(0)*/
+
                 tvProductName.text = product.title
-                tvCompany.text = buildString {
-                    append(product.price)
+                tvCategory.text = product.category
+
+                tvPrice.text = buildString {
+                    if (product.saleState) {
+                        append("FLASH SALE: ")
+                        append(product.salePrice)
+                    } else {
+                        append(product.price)
+                    }
                     append(" ₺")
                 }
-                /*ivFavorite.setBackgroundResource(
-                    if (product.isFav) R.drawable.ic_fav_selected
-                    else R.drawable.ic_fav_unselected
-                )*/
 
                 Glide.with(productIv).load(product.imageOne).into(productIv)
 
                 root.setOnClickListener {
                     onProductClick(product.id ?: 1)
                 }
-
-                /*ivFavorite.setOnClickListener {
-                    onFavProductClick(product)
-                }*/
             }
         }
     }

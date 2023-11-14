@@ -31,7 +31,6 @@ class DetailViewModel @Inject constructor(
                 detailData = result.data
                 DetailState.SuccessState(result.data)
             }
-
             is Resource.Fail -> DetailState.EmptyScreen(result.failMessage)
             is Resource.Error -> DetailState.ShowPopUp(result.errorMessage)
         }
@@ -41,18 +40,6 @@ class DetailViewModel @Inject constructor(
         productRepository.addToCart(firebaseRepository.getUserId(), productId)
     }
 
-    fun setFavoriteState(id: Int) {
-        viewModelScope.launch {
-            detailData?.let {
-                if (it.isFav) {
-                    productRepository.deleteFromFavorites(it)
-                } else {
-                    productRepository.addToFavorites(it)
-                }
-                getProductDetail(id)
-            }
-        }
-    }
 }
 
 sealed interface DetailState {

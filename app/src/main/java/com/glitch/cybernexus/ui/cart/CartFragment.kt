@@ -28,7 +28,7 @@ class CartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
-            cartRv.adapter = cartAdapter
+            rvCart.adapter = cartAdapter
             Database.addProduct(
                 "company product",
                 0.00,

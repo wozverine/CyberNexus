@@ -15,13 +15,6 @@ import com.glitch.cybernexus.databinding.FragmentHomeBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
-/*
-@AndroidEntryPoint
-class HomeFragment : Fragment() {
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
-    private val viewModel by viewModels<HomeViewModel>()
-*/
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -39,30 +32,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         onFavProductClick = ::onFavProductClick
     )
 
-    /*override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }*/
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getProducts()
         viewModel.getSaleProducts()
-        //getCategories()
 
         observeData()
 
         with(binding) {
-            flashSaleRv.adapter = saleAdapter
-            allProductsRv.adapter = productAdapter
+            rvFlashSale.adapter = saleAdapter
+            rvAllProducts.adapter = productAdapter
         }
-
-        /*ivLogOut.setOnClickListener {
-            viewModel.logOut()
-        }*/
 
     }
 
@@ -78,11 +59,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                 is HomeState.EmptyScreen -> {
                     progressBar.gone()
-                    allProductsRv.gone()
-                    flashSaleRv.gone()
-                    /*tvError.text = state.failMessage
-                    tvError.visible()
-                    ivError.visible()*/
+                    rvAllProducts.gone()
+                    rvFlashSale.gone()
+                    tvEmpty.text = state.failMessage
+                    tvEmpty.visible()
+                    ivEmpty.visible()
                 }
 
                 is HomeState.ShowPopUp -> {
@@ -107,10 +88,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                 is SaleState.EmptyScreen -> {
                     progressBar.gone()
-                    flashSaleRv.gone()
-                    /*tvError.text = it.failMessage
-                    tvError.visible()
-                    ivError.visible()*/
+                    rvFlashSale.gone()
+                    tvEmpty.text = it.failMessage
+                    tvEmpty.visible()
+                    ivEmpty.visible()
                 }
 
                 is SaleState.ShowPopUp -> {
@@ -122,8 +103,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
 
-    private fun onProductClick(id: Int) {
-        Toast.makeText(requireContext(), id, Toast.LENGTH_SHORT).show()
+    private fun onProductClick(id: Int){
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(id))
     }
 
     private fun onSaleClick(id: Int) {
@@ -132,11 +113,5 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun onFavProductClick(product: ProductUI) {
         Toast.makeText(requireContext(), product.title, Toast.LENGTH_SHORT).show()
-        //viewModel.setFavoriteState(product)
     }
-
-    /*    override fun onDestroyView() {
-            super.onDestroyView()
-            _binding = null
-        }*/
 }

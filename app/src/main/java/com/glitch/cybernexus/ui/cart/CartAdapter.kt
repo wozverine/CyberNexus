@@ -30,10 +30,10 @@ class CartAdapter(
 
         fun bind(product: Product) {
             with(binding) {
-                val strList = product.title?.split(" ")
+                //val strList = product.title?.split(" ")
 
                 tvProductName.text = product.title
-                tvCompany.text = strList?.get(0)
+                tvCategory.text = product.category
 
                 root.setOnClickListener {
                     product.title?.let { it1 -> onCartClicked(it1) }

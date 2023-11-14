@@ -4,7 +4,7 @@ import com.glitch.cybernexus.common.Resource
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
 
-class FirebaseRepository ( private val firebaseAuth: FirebaseAuth) {
+class FirebaseRepository(private val firebaseAuth: FirebaseAuth) {
 
     fun isUserLoggedIn() = firebaseAuth.currentUser != null
 

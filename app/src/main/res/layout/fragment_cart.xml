@@ -8,18 +8,18 @@
     tools:context=".ui.cart.CartFragment">
 
     <LinearLayout
-        android:id="@+id/button_layout"
+        android:id="@+id/layout_buttons"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
         android:padding="4sp"
-        app:layout_constraintBottom_toTopOf="@id/clear_cart_btn"
+        app:layout_constraintBottom_toTopOf="@id/btn_clear_cart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/cart_tv"
+            android:id="@+id/tv_cart"
             style="@style/TextAppearance.AppCompat.Display1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cart_rv"
+            android:id="@+id/rv_cart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -38,16 +38,16 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/clear_cart_btn"
+        android:id="@+id/btn_clear_cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:text="@string/clear_cart"
-        app:layout_constraintBottom_toTopOf="@id/check_out_btn"
+        app:layout_constraintBottom_toTopOf="@id/btn_check_out"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/check_out_btn"
+        android:id="@+id/btn_check_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/check_out"

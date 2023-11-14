@@ -13,14 +13,14 @@
         tools:context=".ui.home.HomeFragment">
 
         <TextView
-            android:id="@+id/flash_sale_tv"
+            android:id="@+id/tv_flash_sale"
             style="@style/TextAppearance.AppCompat.Display1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/flash_sale" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/flash_sale_rv"
+            android:id="@+id/rv_flash_sale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -28,31 +28,15 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_sale" />
 
-        <!--<TextView
-            android:id="@+id/category_tv"
-            style="@style/TextAppearance.AppCompat.Display1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/category" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categories_rv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="4dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_category" />-->
-
         <TextView
-            android:id="@+id/products_tv"
+            android:id="@+id/tv_products"
             style="@style/TextAppearance.AppCompat.Display1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/products" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/all_products_rv"
+            android:id="@+id/rv_all_products"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
