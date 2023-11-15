@@ -21,8 +21,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     private val viewModel by viewModels<FavoritesViewModel>()
 
     private val favoriteProductsAdapter = FavoriteProductsAdapter(
-        onProductClick = ::onFavoriteProductClick,
-        onDeleteClick = ::onDeleteClick
+        onProductClick = ::onProductClick, onDeleteClick = ::onDeleteClick
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,34 +40,46 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     private fun observeData() = with(binding) {
         viewModel.favoritesState.observe(viewLifecycleOwner) { state ->
             when (state) {
-                FavoritesState.Loading -> progressBar.visible()
+                FavoritesState.Loading -> {
+                    progressBar.visible()
+                    favoritesRv.gone()
+                }
 
                 is FavoritesState.SuccessState -> {
                     progressBar.gone()
                     favoriteProductsAdapter.submitList(state.products)
+                    favoritesRv.visible()
+                    favoritesTv.visible()
                 }
 
                 is FavoritesState.EmptyScreen -> {
+                    favoritesRv.gone()
                     progressBar.gone()
+                    favoritesTv.visible()
                     ivEmpty.visible()
                     tvEmpty.visible()
-                    favoritesRv.gone()
                     tvEmpty.text = state.failMessage
                 }
 
                 is FavoritesState.ShowMessage -> {
                     progressBar.gone()
+                    favoritesTv.gone()
                     Snackbar.make(requireView(), state.errorMessage, 1000).show()
                 }
             }
         }
     }
 
-    private fun onFavoriteProductClick(id: Int) {
-        findNavController().navigate(FavoritesFragmentDirections.actionFavoritesFragmentToDetailsFragment(id))
+    private fun onProductClick(id: Int) {
+        findNavController().navigate(
+            FavoritesFragmentDirections.actionFavoritesFragmentToDetailsFragment(
+                id
+            )
+        )
     }
 
     private fun onDeleteClick(product: ProductUI) {
         viewModel.deleteFromFavorites(product)
     }
 }
+

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ui.search.SearchFragment"
-    android:padding="10sp">
+    android:padding="10sp"
+    tools:context="ui.search.SearchFragment">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"

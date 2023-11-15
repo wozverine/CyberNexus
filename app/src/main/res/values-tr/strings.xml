@@ -16,6 +16,7 @@
     <string name="search">Ara</string>
     <string name="email">Mail Adresi</string>
     <string name="flash_sale">Flaş indirimler</string>
+    <string name="welcome">CyberNexus\'a Hoşgeldiniz</string>
     <string name="category">Kategoriler</string>
     <string name="check_out">Satın Al</string>
     <string name="clear_cart">Sepeti Temizle</string>
@@ -26,4 +27,15 @@
     <string name="sale">FLAŞ İNDİRİM: </string>
     <string name="add_to_cart">Sepete Ekle</string>
     <string name="total_amount">Toplam Fiyat:</string>
+    <string name="payment">Ödeme</string>
+    <string name="name_surname">İsim Soyisim</string>
+    <string name="card_num">Kart Numarası</string>
+    <string name="expire_month">Son Kullanım Ay</string>
+    <string name="expire_year">Son Kullanım Yıl</string>
+    <string name="cvv">CVV</string>
+    <string name="order">Satın Al</string>
+    <string name="payment_success_text">Siparişiniz yakında teslim edilecek.\n Bizi tercih ettiğiniz için teşekkürler!</string>
+    <string name="success">Ödeme başarılı!</string>
+    <string name="continue_shopping">Alışverişe Devam Et</string>
+    <string name="card_num_placeholder">1234567812345678</string>
 </resources>

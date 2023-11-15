@@ -53,7 +53,7 @@ class SaleAdapter(
                         R.drawable.icon_fav_unselected
                     }
                 )
-                
+
                 ratingBar.rating = (product.rate).toFloat()
 
                 Glide.with(productIv).load(product.imageOne).into(productIv)
@@ -61,7 +61,7 @@ class SaleAdapter(
                 root.setOnClickListener {
                     onProductClick(product.id)
                 }
-                btnFav.setOnClickListener{
+                btnFav.setOnClickListener {
                     onFavProductClick(product)
                 }
             }

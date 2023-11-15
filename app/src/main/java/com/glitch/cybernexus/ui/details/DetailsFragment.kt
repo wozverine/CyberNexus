@@ -1,13 +1,11 @@
 package com.glitch.cybernexus.ui.details
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.glitch.cybernexus.R
 import com.glitch.cybernexus.common.gone
 import com.glitch.cybernexus.common.viewBinding
@@ -18,9 +16,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment(R.layout.fragment_details) {
+
     private val binding by viewBinding(FragmentDetailsBinding::bind)
 
     private val viewModel by viewModels<DetailViewModel>()
+
+    private val imageSliderAdapter = ImageSliderAdapter()
 
     private val args by navArgs<DetailsFragmentArgs>()
 
@@ -28,11 +29,8 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getProductDetail(args.id)
-        Log.v("aaaaaaaaaaaaaaaa", args.id.toString())
-
 
         observeData()
-
 
         with(binding) {
             btnAddToCart.setOnClickListener {
@@ -41,6 +39,10 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
             btnBack.setOnClickListener {
                 findNavController().navigateUp()
+            }
+
+            btnFav.setOnClickListener {
+                viewModel.setFavState(args.id)
             }
         }
     }
@@ -52,35 +54,42 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
                 is DetailState.SuccessState -> {
 
-                    Glide.with(imageSlider).load(state.product.imageOne).into(imageSlider)
+                    viewPager.adapter = imageSliderAdapter
+                    imageSliderAdapter.updateList(
+                        listOf(
+                            state.product.imageOne, state.product.imageTwo, state.product.imageThree
+                        )
+                    )
+
                     progressBar.gone()
                     ratingBar.visible()
-                    imageSlider.visible()
+                    viewPager.visible()
                     btnFav.visible()
 
-                    //tvProductName.text = state.product.title
                     tvDetails.text = state.product.description
                     ratingBar.rating = state.product.rate.toFloat()
-                    //tvCategory.text = state.product.category
+
                     val strList = state.product.title?.split(" ")
-                    tvProductName.text = strList?.subList(1,strList.size)?.joinToString ()
+                    tvProductName.text = strList?.subList(1, strList.size)?.joinToString()
                     tvCompany.text = strList?.get(0)
 
-                    if (!state.product.saleState) {
-                        tvPrice.text = "${state.product.price}"
-                    } else {
-                        tvPrice.text = "${state.product.salePrice}"
+                    tvPrice.text = buildString {
+                        if (!state.product.saleState) {
+                            append("FLASH SALE: ")
+                            append(state.product.salePrice)
+                        } else {
+                            append(state.product.price)
+                        }
+                        append(" ₺")
                     }
 
-                    btnFav.setImageResource(
+                    btnFav.setBackgroundResource(
                         if (state.product.isFav) {
-                        R.drawable.icon_fav_selected
-                    } else {
-                        R.drawable.icon_fav_unselected
-                    }
-
+                            R.drawable.icon_fav_selected
+                        } else {
+                            R.drawable.icon_fav_unselected
+                        }
                     )
-                    Log.v("aaaaaaaaaaaaaaaa",state.product.title)
                 }
 
                 is DetailState.EmptyScreen -> {
@@ -92,10 +101,8 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
                 is DetailState.ShowMessage -> {
                     progressBar.gone()
-                    Snackbar.make(requireView(), state.errorMessage, 1000).show()
-                    Log.v("aaaaaaaaaaaaaaaa",state.errorMessage)
+                    Snackbar.make(requireView(), state.errorMessage, 2000).show()
                 }
-
             }
         }
     }

@@ -32,19 +32,17 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         with(binding) {
             rvCart.adapter = cartAdapter
 
-            btnClearCart.setOnClickListener{
+            btnClearCart.setOnClickListener {
                 viewModel.clearCart()
             }
 
-            /*ivBackCart.setOnClickListener{
-                findNavController().navigateUp()
+            btnCheckOut.setOnClickListener {
+                findNavController().navigate(
+                    CartFragmentDirections.actionCartFragmentToPaymentFragment()
+                )
             }
-
-            btnCheckOut.setOnClickListener{
-                findNavController().navigate(CartFragmentDirections.cartToPayment())*/
         }
     }
-
 
     private fun observeData() = with(binding) {
         viewModel.cartState.observe(viewLifecycleOwner) {
@@ -54,11 +52,11 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                     tvTotalamountnumber.gone()
                     tvTotalamounttext.gone()
                     btnClearCart.gone()
-                    tvCart.gone()
                     btnCheckOut.gone()
                 }
 
                 is CartState.SuccessState -> {
+                    progressBar.gone()
                     cartAdapter.submitList(it.products)
                     rvCart.visible()
                     tvTotalamountnumber.visible()
@@ -66,7 +64,6 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                     btnClearCart.visible()
                     btnCheckOut.visible()
                     tvCart.visible()
-                    progressBar.gone()
                 }
 
                 is CartState.EmptyScreen -> {
@@ -74,7 +71,6 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                     tvTotalamountnumber.gone()
                     tvTotalamounttext.gone()
                     btnClearCart.gone()
-                    tvCart.gone()
                     btnCheckOut.gone()
                     progressBar.gone()
                     tvEmpty.text = it.failMessage
@@ -96,6 +92,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         }
     }
 
+
     private fun onProductClick(id: Int) {
         findNavController().navigate(CartFragmentDirections.actionCartFragmentToDetailsFragment(id))
     }
@@ -104,3 +101,4 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         viewModel.deleteFromCart(productId)
     }
 }
+

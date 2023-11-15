@@ -15,6 +15,7 @@
     <string name="search">Search</string>
     <string name="email">Email</string>
     <string name="flash_sale">Flash Sale</string>
+    <string name="welcome">Welcome to CyberNexus</string>
     <string name="category">Enhanfdfdfcements</string>
     <string name="check_out">Check Out</string>
     <string name="clear_cart">Clear Cart</string>
@@ -25,4 +26,15 @@
     <string name="sale">FLASH PRICE: </string>
     <string name="add_to_cart">Add to Cart</string>
     <string name="total_amount">Total Amount:</string>
+    <string name="payment">Payment</string>
+    <string name="name_surname">Name Surname</string>
+    <string name="card_num">Card Number</string>
+    <string name="expire_month">Expire Month</string>
+    <string name="expire_year">Expire Year</string>
+    <string name="cvv">CVV</string>
+    <string name="order">Submit Order</string>
+    <string name="payment_success_text">Your order will be delivered soon.\n Thank you for choosing our app!</string>
+    <string name="success">Payment Successful!</string>
+    <string name="continue_shopping">Continue Shopping</string>
+    <string name="card_num_placeholder">1234567812345678</string>
 </resources>

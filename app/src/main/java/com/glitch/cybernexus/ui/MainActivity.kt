@@ -23,8 +23,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        //MainApplication.provideRetrofit(this)
-
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         val navController = navHostFragment.navController
@@ -39,6 +37,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.signInFragment -> binding.bottomNavigation.visibility = View.GONE
                 R.id.signUpFragment -> binding.bottomNavigation.visibility = View.GONE
                 R.id.splashFragment -> binding.bottomNavigation.visibility = View.GONE
+                R.id.successFragment -> binding.bottomNavigation.visibility = View.GONE
                 else -> binding.bottomNavigation.visibility = View.VISIBLE
             }
 

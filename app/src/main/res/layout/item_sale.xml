@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:contentPadding="8dp"
     android:layout_margin="8dp"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="12dp"
     app:cardElevation="12dp"
+    app:contentPadding="8dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -16,24 +16,26 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="5sp">
 
         <ImageView
             android:id="@+id/product_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/social_facebook"
-            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/icon_home"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
+            android:id="@+id/btn_fav"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:id="@+id/btn_fav"
             android:background="@drawable/icon_fav_unselected"
             app:layout_constraintBottom_toBottomOf="@id/product_iv"
-            app:layout_constraintEnd_toEndOf="@id/product_iv"/>
+            app:layout_constraintEnd_toEndOf="@id/product_iv" />
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -93,8 +95,8 @@
             android:id="@+id/tv_sale_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_marginStart="5sp"
+            android:layout_marginTop="5dp"
             android:textColor="@color/design_default_color_on_secondary"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

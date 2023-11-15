@@ -63,7 +63,7 @@ class ProductAdapter(
                     onProductClick(product.id)
                 }
 
-                btnFav.setOnClickListener{
+                btnFav.setOnClickListener {
                     onFavProductClick(product)
                 }
             }

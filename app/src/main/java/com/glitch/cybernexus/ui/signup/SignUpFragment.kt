@@ -35,22 +35,16 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
 
         sharedPref = requireActivity().getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
 
-        val isLogin = sharedPref.getBoolean("isLogin", false)
-
         observeData()
 
         with(binding) {
             signupNextBtn.setOnClickListener() {
                 viewModel.signUp(
-                    etMailSignIn.text.toString(),
-                    etPasswordSignUp.text.toString()
+                    etMailSignIn.text.toString(), etPasswordSignUp.text.toString()
                 )
-                //findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
             }
             spannableText(
-                getString(R.string.login),
-                signupTv,
-                R.id.action_signUpFragment_to_signInFragment
+                getString(R.string.login), signupTv, R.id.action_signUpFragment_to_signInFragment
             )
         }
     }
@@ -95,5 +89,4 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
             }
         }
     }
-
 }

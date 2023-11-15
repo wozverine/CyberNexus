@@ -3,7 +3,6 @@ package com.glitch.cybernexus.ui.home
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -27,13 +26,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var sharedPref: SharedPreferences
 
     private val saleAdapter = SaleAdapter(
-        onSaleClick = ::onSaleClick,
-        onFavProductClick = ::onFavProductClick
+        onSaleClick = ::onSaleClick, onFavProductClick = ::onFavProductClick
     )
 
     private val productAdapter = ProductAdapter(
-        onAllProductClick = ::onProductClick,
-        onFavProductClick = ::onFavProductClick
+        onAllProductClick = ::onProductClick, onFavProductClick = ::onFavProductClick
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,8 +40,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.getSaleProducts()
 
         sharedPref = requireActivity().getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
-
-        val isLogin = sharedPref.getBoolean("isLogin", false)
 
         observeData()
 
@@ -58,7 +53,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 viewModel.logOut()
             }
         }
-
     }
 
     private fun observeData() = with(binding) {
@@ -86,7 +80,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                 HomeState.GoToSignIn -> {
                     findNavController().navigate(R.id.action_homeFragment_to_signInFragment)
-                    //findNavController().popBackStack()
                 }
             }
         }
@@ -117,7 +110,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
 
-    private fun onProductClick(id: Int){
+    private fun onProductClick(id: Int) {
         findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(id))
     }
 
@@ -127,6 +120,5 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun onFavProductClick(product: ProductUI) {
         viewModel.setFavoriteState(product)
-        Log.v("aaaaa",product.isFav.toString())
     }
 }

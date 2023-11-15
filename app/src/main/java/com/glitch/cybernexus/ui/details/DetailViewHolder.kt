@@ -41,6 +41,19 @@ class DetailViewModel @Inject constructor(
         productRepository.addToCart(firebaseRepository.getUserId(), productId)
     }
 
+    fun setFavState(id: Int) {
+        viewModelScope.launch {
+            detailData?.let {
+                if (it.isFav) {
+                    productRepository.deleteFromFavorites(it)
+                } else {
+                    productRepository.addToFavorites(it)
+                }
+                getProductDetail(id)
+            }
+        }
+    }
+
 }
 
 sealed interface DetailState {

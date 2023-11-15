@@ -6,13 +6,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.glitch.cybernexus.R
 import com.glitch.cybernexus.data.model.response.ProductUI
 import com.glitch.cybernexus.databinding.ItemProductHomeBinding
 
 class FavoriteProductsAdapter(
-    private val onProductClick: (Int) -> Unit,
-    private val onDeleteClick: (ProductUI) -> Unit
-) : ListAdapter<ProductUI, FavoriteProductsAdapter.FavoriteProductsViewHolder>(FavProductDiffUtilCallBack()) {
+    private val onProductClick: (Int) -> Unit, private val onDeleteClick: (ProductUI) -> Unit
+) : ListAdapter<ProductUI, FavoriteProductsAdapter.FavoriteProductsViewHolder>(
+    FavProductDiffUtilCallBack()
+) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
@@ -24,7 +26,8 @@ class FavoriteProductsAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: FavoriteProductsViewHolder, position: Int) = holder.bind(getItem(position))
+    override fun onBindViewHolder(holder: FavoriteProductsViewHolder, position: Int) =
+        holder.bind(getItem(position))
 
 
     class FavoriteProductsViewHolder(
@@ -32,10 +35,9 @@ class FavoriteProductsAdapter(
         private val onFavoriteProductClick: (Int) -> Unit,
         private val onDeleteClick: (ProductUI) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(product: ProductUI) {
             with(binding) {
-                val strList = product.title?.split(" ")
-
                 tvProductName.text = product.title
                 tvCategory.text = product.category
 
@@ -49,10 +51,15 @@ class FavoriteProductsAdapter(
                     append(" ₺")
                 }
 
+                btnFav.setBackgroundResource(R.drawable.icon_fav_selected)
+
                 Glide.with(productIv).load(product.imageOne).into(productIv)
 
                 root.setOnClickListener {
                     onFavoriteProductClick(product.id)
+                }
+                btnFav.setOnClickListener {
+                    onDeleteClick(product)
                 }
             }
         }

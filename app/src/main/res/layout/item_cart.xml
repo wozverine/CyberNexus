@@ -20,14 +20,15 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="10sp">
+            android:padding="10sp">
 
             <ImageView
                 android:id="@+id/product_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/social_facebook"
+                android:background="@drawable/icon_home"
                 android:contentDescription="@string/products"
+                android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tv_product_name"
                 app:layout_constraintStart_toStartOf="@id/tv_price"
@@ -86,18 +87,17 @@
                 android:background="@drawable/icon_delete"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/tv_category"
-                app:layout_constraintTop_toTopOf="@id/ratingBar"/>
+                app:layout_constraintTop_toTopOf="@id/ratingBar" />
 
             <ImageButton
+                android:id="@+id/btn_delete"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:id="@+id/btn_delete"
                 android:background="@drawable/icon_delete"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/tv_category"
-                app:layout_constraintTop_toTopOf="@id/ratingBar"/>
+                app:layout_constraintTop_toTopOf="@id/ratingBar" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,8 +23,8 @@
             style="@style/TextAppearance.AppCompat.Display1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cart"
             android:layout_marginBottom="4sp"
+            android:text="@string/cart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,24 +47,24 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
+        android:id="@+id/tv_totalamounttext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_totalamounttext"
-        android:text="@string/total_amount"
         android:padding="5sp"
+        android:text="@string/total_amount"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/btn_check_out"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:id="@+id/tv_totalamountnumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_totalamountnumber"
+        android:padding="5sp"
         android:text="@string/price"
         android:textSize="16sp"
-        android:padding="5sp"
         app:layout_constraintBottom_toTopOf="@id/btn_check_out"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/btn_check_out"

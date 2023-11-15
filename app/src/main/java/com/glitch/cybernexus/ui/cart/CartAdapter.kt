@@ -11,9 +11,8 @@ import com.glitch.cybernexus.databinding.ItemCartBinding
 
 
 class CartAdapter(
-    private val onProductClick: (Int) -> Unit,
-    private val onDeleteClick: (Int) -> Unit
-) : ListAdapter<ProductUI, CartAdapter.CartViewHolder>(ProductDiffUtilCallBack())  {
+    private val onProductClick: (Int) -> Unit, private val onDeleteClick: (Int) -> Unit
+) : ListAdapter<ProductUI, CartAdapter.CartViewHolder>(ProductDiffUtilCallBack()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
@@ -24,8 +23,8 @@ class CartAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: CartViewHolder, position: Int) = holder.bind(getItem(position))
-
+    override fun onBindViewHolder(holder: CartViewHolder, position: Int) =
+        holder.bind(getItem(position))
 
 
     class CartViewHolder(
@@ -59,7 +58,6 @@ class CartAdapter(
                     onDeleteClick(product.id)
                 }
             }
-
         }
     }
 }
