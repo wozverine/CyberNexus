@@ -1,8 +1,10 @@
 package com.glitch.cybernexus.ui.home
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -22,6 +24,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val viewModel by viewModels<HomeViewModel>()
 
+    private lateinit var sharedPref: SharedPreferences
+
     private val saleAdapter = SaleAdapter(
         onSaleClick = ::onSaleClick,
         onFavProductClick = ::onFavProductClick
@@ -38,11 +42,21 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.getProducts()
         viewModel.getSaleProducts()
 
+        sharedPref = requireActivity().getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
+
+        val isLogin = sharedPref.getBoolean("isLogin", false)
+
         observeData()
 
         with(binding) {
             rvFlashSale.adapter = saleAdapter
             rvAllProducts.adapter = productAdapter
+
+            btnLogout.setOnClickListener {
+                viewModel.clearFavorites()
+                sharedPref.edit().putBoolean("isLogin", false).apply()
+                viewModel.logOut()
+            }
         }
 
     }
@@ -60,19 +74,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 is HomeState.EmptyScreen -> {
                     progressBar.gone()
                     rvAllProducts.gone()
-                    rvFlashSale.gone()
                     tvEmpty.text = state.failMessage
                     tvEmpty.visible()
                     ivEmpty.visible()
                 }
 
-                is HomeState.ShowPopUp -> {
+                is HomeState.ShowMessage -> {
                     progressBar.gone()
                     Snackbar.make(requireView(), state.errorMessage, 1000).show()
                 }
 
                 HomeState.GoToSignIn -> {
-                    findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+                    findNavController().navigate(R.id.action_homeFragment_to_signInFragment)
+                    //findNavController().popBackStack()
                 }
             }
         }
@@ -94,7 +108,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     ivEmpty.visible()
                 }
 
-                is SaleState.ShowPopUp -> {
+                is SaleState.ShowMessage -> {
                     progressBar.gone()
                     Snackbar.make(requireView(), it.errorMessage, 1000).show()
                 }
@@ -112,6 +126,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun onFavProductClick(product: ProductUI) {
-        Toast.makeText(requireContext(), product.title, Toast.LENGTH_SHORT).show()
+        viewModel.setFavoriteState(product)
+        Log.v("aaaaa",product.isFav.toString())
     }
 }

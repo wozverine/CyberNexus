@@ -31,8 +31,9 @@ class DetailViewModel @Inject constructor(
                 detailData = result.data
                 DetailState.SuccessState(result.data)
             }
+
             is Resource.Fail -> DetailState.EmptyScreen(result.failMessage)
-            is Resource.Error -> DetailState.ShowPopUp(result.errorMessage)
+            is Resource.Error -> DetailState.ShowMessage(result.errorMessage)
         }
     }
 
@@ -45,6 +46,6 @@ class DetailViewModel @Inject constructor(
 sealed interface DetailState {
     object Loading : DetailState
     data class SuccessState(val product: ProductUI) : DetailState
-    data class ShowPopUp(val errorMessage: String) : DetailState
     data class EmptyScreen(val failMessage: String) : DetailState
+    data class ShowMessage(val errorMessage: String) : DetailState
 }

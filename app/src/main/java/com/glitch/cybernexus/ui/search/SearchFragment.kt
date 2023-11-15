@@ -60,20 +60,20 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
                 is SearchState.SuccessState -> {
                     progressBar.gone()
-                    ivError.gone()
-                    tvError.gone()
+                    ivEmpty.gone()
+                    tvEmpty.gone()
                     searchAdapter.submitList(state.products)
                 }
 
                 is SearchState.EmptyScreen -> {
                     progressBar.gone()
                     searchRv.gone()
-                    tvError.text = state.failMessage
-                    tvError.visible()
-                    ivError.visible()
+                    tvEmpty.text = state.failMessage
+                    tvEmpty.visible()
+                    ivEmpty.visible()
                 }
 
-                is SearchState.ShowPopUp -> {
+                is SearchState.ShowMessage -> {
                     progressBar.gone()
                     Snackbar.make(requireView(), state.errorMessage, 1000).show()
                 }

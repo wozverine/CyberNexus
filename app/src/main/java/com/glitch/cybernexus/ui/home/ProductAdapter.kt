@@ -29,7 +29,7 @@ class ProductAdapter(
     class ProductViewHolder(
         private val binding: ItemProductHomeBinding,
         private val onProductClick: (Int) -> Unit,
-        private val onFavClick: (ProductUI) -> Unit
+        private val onFavProductClick: (ProductUI) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: ProductUI) {
@@ -60,7 +60,11 @@ class ProductAdapter(
                 Glide.with(productIv).load(product.imageOne).into(productIv)
 
                 root.setOnClickListener {
-                    onProductClick(product.id ?: 1)
+                    onProductClick(product.id)
+                }
+
+                btnFav.setOnClickListener{
+                    onFavProductClick(product)
                 }
             }
         }

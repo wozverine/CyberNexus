@@ -61,6 +61,9 @@ class SaleAdapter(
                 root.setOnClickListener {
                     onProductClick(product.id)
                 }
+                btnFav.setOnClickListener{
+                    onFavProductClick(product)
+                }
             }
         }
     }

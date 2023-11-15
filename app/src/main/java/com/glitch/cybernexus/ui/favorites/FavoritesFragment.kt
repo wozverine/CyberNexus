@@ -1,146 +1,74 @@
 package com.glitch.cybernexus.ui.favorites
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.glitch.cybernexus.data.source.Database
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.glitch.cybernexus.R
+import com.glitch.cybernexus.common.gone
+import com.glitch.cybernexus.common.viewBinding
+import com.glitch.cybernexus.common.visible
+import com.glitch.cybernexus.data.model.response.ProductUI
 import com.glitch.cybernexus.databinding.FragmentFavoritesBinding
+import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
-class FavoritesFragment : Fragment() {
-    private var _binding: FragmentFavoritesBinding? = null
-    private val binding get() = _binding!!
+@AndroidEntryPoint
+class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
+    private val binding by viewBinding(FragmentFavoritesBinding::bind)
 
-    private val categoryFilterAdapter = CategoryFilterAdapter(
-        onCategoryFilterClick = ::onCategoryFilterClick
-    )
+    private val viewModel by viewModels<FavoritesViewModel>()
+
     private val favoriteProductsAdapter = FavoriteProductsAdapter(
-        onFavoriteProductClick = ::onFavoriteProductClick
+        onProductClick = ::onFavoriteProductClick,
+        onDeleteClick = ::onDeleteClick
     )
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //getCategories()
+        viewModel.getFavorites()
+
+        observeData()
 
         with(binding) {
-            categoryRv.adapter = categoryFilterAdapter
             favoritesRv.adapter = favoriteProductsAdapter
-
-            Database.addProduct(
-                "company product",
-                0.00,
-                "descprition",
-                "category",
-                "imageone",
-                "imagetwo",
-                "imagethree",
-                4.0,
-                5,
-                true,
-                45.0
-            )
-            Database.addProduct(
-                "company product",
-                0.00,
-                "descprition",
-                "category",
-                "imageone",
-                "imagetwo",
-                "imagethree",
-                4.0,
-                5,
-                true,
-                45.0
-            )
-            Database.addProduct(
-                "company product",
-                0.00,
-                "descprition",
-                "category",
-                "imageone",
-                "imagetwo",
-                "imagethree",
-                4.0,
-                5,
-                true,
-                45.0
-            )
-            Database.addProduct(
-                "company product",
-                0.00,
-                "descprition",
-                "category",
-                "imageone",
-                "imagetwo",
-                "imagethree",
-                4.0,
-                5,
-                true,
-                45.0
-            )
-            Database.addProduct(
-                "company product",
-                0.00,
-                "descprition",
-                "category",
-                "imageone",
-                "imagetwo",
-                "imagethree",
-                4.0,
-                5,
-                true,
-                45.0
-            )
-            //categoryFilterAdapter.updateList(Database.getCategory())
-            favoriteProductsAdapter.updateList(Database.getProduct())
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
-    private fun onCategoryFilterClick(desc: String) {
-        Toast.makeText(requireContext(), desc, Toast.LENGTH_SHORT).show()
-    }
+    private fun observeData() = with(binding) {
+        viewModel.favoritesState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                FavoritesState.Loading -> progressBar.visible()
 
-    private fun onFavoriteProductClick(desc: String) {
-        Toast.makeText(requireContext(), desc, Toast.LENGTH_SHORT).show()
-    }
-
-    /*private fun getCategories() {
-        MainApplication.productService?.getCategories()
-            ?.enqueue(object : Callback<GetCategoryListResponse> {
-
-                override fun onResponse(
-                    call: Call<GetCategoryListResponse>,
-                    response: Response<GetCategoryListResponse>
-                ) {
-                    val result = response.body()
-
-                    if (result?.status == 200) {
-                        //Log.e("lister category", result.categories.toString())
-                        categoryFilterAdapter.submitList(result.categories.orEmpty())
-                    } else {
-                        Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()
-                    }
+                is FavoritesState.SuccessState -> {
+                    progressBar.gone()
+                    favoriteProductsAdapter.submitList(state.products)
                 }
 
-                override fun onFailure(call: Call<GetCategoryListResponse>, t: Throwable) {
-                    Log.e("CantGetCategories", t.message.orEmpty())
+                is FavoritesState.EmptyScreen -> {
+                    progressBar.gone()
+                    ivEmpty.visible()
+                    tvEmpty.visible()
+                    favoritesRv.gone()
+                    tvEmpty.text = state.failMessage
                 }
-            })
-    }*/
 
+                is FavoritesState.ShowMessage -> {
+                    progressBar.gone()
+                    Snackbar.make(requireView(), state.errorMessage, 1000).show()
+                }
+            }
+        }
+    }
+
+    private fun onFavoriteProductClick(id: Int) {
+        findNavController().navigate(FavoritesFragmentDirections.actionFavoritesFragmentToDetailsFragment(id))
+    }
+
+    private fun onDeleteClick(product: ProductUI) {
+        viewModel.deleteFromFavorites(product)
+    }
 }

@@ -24,43 +24,41 @@ class SignInViewModel @Inject constructor(
             _signInState.value = SignInState.Loading
 
             _signInState.value = when (val result = firebaseRepository.signIn(email, password)) {
-                is Resource.Success -> SignInState.GoToHome
-                is Resource.Fail -> SignInState.ShowPopUp(result.failMessage)
-                is Resource.Error -> SignInState.ShowPopUp(result.errorMessage)
+                is Resource.Success -> SignInState.Success
+                is Resource.Fail -> SignInState.ShowMessage(result.failMessage)
+                is Resource.Error -> SignInState.ShowMessage(result.errorMessage)
             }
         }
     }
 
     private fun checkFields(email: String, password: String): Boolean {
-        return when {
-            email.isEmpty() -> {
-                _signInState.value = SignInState.ShowPopUp("Please fill in your e-mail")
-                false
-            }
+        if (email.isEmpty()) {
+            _signInState.value = SignInState.ShowMessage("Please fill in your e-mail")
+            return false
+        }
+        if (Patterns.EMAIL_ADDRESS.matcher(email).matches().not()) {
+            _signInState.value = SignInState.ShowMessage("Please check your email format")
+            return false
+        }
 
-            Patterns.EMAIL_ADDRESS.matcher(email).matches().not() -> {
-                _signInState.value = SignInState.ShowPopUp("Please check your email format")
-                false
-            }
+        if (password.isEmpty()) {
+            _signInState.value = SignInState.ShowMessage("Please fill in your password")
+            return false
+        }
 
-            password.isEmpty() -> {
-                _signInState.value = SignInState.ShowPopUp("Please fill in your password")
-                false
-            }
+        if (password.length < 6) {
+            _signInState.value =
+                SignInState.ShowMessage("Password cannot be less than 6 characters")
+            return false
 
-            password.length < 6 -> {
-                _signInState.value =
-                    SignInState.ShowPopUp("Password cannot be less than 6 characters")
-                false
-            }
-
-            else -> true
+        } else {
+            return true
         }
     }
 }
 
 sealed interface SignInState {
     object Loading : SignInState
-    object GoToHome : SignInState
-    data class ShowPopUp(val errorMessage: String) : SignInState
+    object Success : SignInState
+    data class ShowMessage(val errorMessage: String) : SignInState
 }

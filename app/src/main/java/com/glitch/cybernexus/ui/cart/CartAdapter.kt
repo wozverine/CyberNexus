@@ -2,50 +2,74 @@ package com.glitch.cybernexus.ui.cart
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.glitch.cybernexus.data.model.response.Product
-import com.glitch.cybernexus.databinding.ItemProductHomeBinding
+import com.bumptech.glide.Glide
+import com.glitch.cybernexus.data.model.response.ProductUI
+import com.glitch.cybernexus.databinding.ItemCartBinding
+
 
 class CartAdapter(
-    private val onCartClicked: (String) -> Unit
-) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
-    private val cartList = mutableListOf<Product>()
+    private val onProductClick: (Int) -> Unit,
+    private val onDeleteClick: (Int) -> Unit
+) : ListAdapter<ProductUI, CartAdapter.CartViewHolder>(ProductDiffUtilCallBack())  {
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
-        val binding =
-            ItemProductHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CartViewHolder(binding, onCartClicked)
+        return CartViewHolder(
+            ItemCartBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            onProductClick,
+            onDeleteClick
+        )
     }
 
-    override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        holder.bind(cartList[position])
-    }
+    override fun onBindViewHolder(holder: CartViewHolder, position: Int) = holder.bind(getItem(position))
 
-    override fun getItemCount(): Int {
-        return cartList.size
-    }
+
 
     class CartViewHolder(
-        private val binding: ItemProductHomeBinding, val onCartClicked: (String) -> Unit
+        private val binding: ItemCartBinding,
+        private val onProductClick: (Int) -> Unit,
+        private val onDeleteClick: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(product: Product) {
-            with(binding) {
-                //val strList = product.title?.split(" ")
+        fun bind(product: ProductUI) {
 
+            with(binding) {
                 tvProductName.text = product.title
                 tvCategory.text = product.category
+                tvPrice.text = buildString {
+                    if (product.saleState) {
+                        append("FLASH SALE: ")
+                        append(product.salePrice)
+                    } else {
+                        append(product.price)
+                    }
+                    append(" ₺")
+                }
+
+                Glide.with(productIv).load(product.imageOne).into(productIv)
 
                 root.setOnClickListener {
-                    product.title?.let { it1 -> onCartClicked(it1) }
+                    onProductClick(product.id)
+                }
+
+                btnDelete.setOnClickListener {
+                    onDeleteClick(product.id)
                 }
             }
 
         }
     }
+}
 
-    fun updateList(list: List<Product>) {
-        cartList.clear()
-        cartList.addAll(list)
-        notifyItemRangeChanged(0, list.size)
+class ProductDiffUtilCallBack : DiffUtil.ItemCallback<ProductUI>() {
+    override fun areItemsTheSame(oldItem: ProductUI, newItem: ProductUI): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: ProductUI, newItem: ProductUI): Boolean {
+        return oldItem == newItem
     }
 }

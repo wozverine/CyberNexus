@@ -90,7 +90,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                     ivError.visible()
                 }
 
-                is DetailState.ShowPopUp -> {
+                is DetailState.ShowMessage -> {
                     progressBar.gone()
                     Snackbar.make(requireView(), state.errorMessage, 1000).show()
                     Log.v("aaaaaaaaaaaaaaaa",state.errorMessage)

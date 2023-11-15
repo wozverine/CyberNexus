@@ -1,5 +1,7 @@
 package com.glitch.cybernexus.ui.signin
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableString
@@ -7,33 +9,43 @@ import android.text.Spanned
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.glitch.cybernexus.R
+import com.glitch.cybernexus.common.gone
+import com.glitch.cybernexus.common.viewBinding
+import com.glitch.cybernexus.common.visible
 import com.glitch.cybernexus.databinding.FragmentSigninBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignInFragment : Fragment() {
-    private var _binding: FragmentSigninBinding? = null
-    private val binding get() = _binding!!
+class SignInFragment : Fragment(R.layout.fragment_signin) {
+    private val binding by viewBinding(FragmentSigninBinding::bind)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSigninBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private val viewModel: SignInViewModel by viewModels()
+
+    private lateinit var sharedPref: SharedPreferences
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        sharedPref = requireActivity().getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
+
+        val isLogin = sharedPref.getBoolean("isLogin", false)
+
+        if (isLogin) {
+            findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+        }
+
         with(binding) {
             signinNextBtn.setOnClickListener() {
-                findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+                viewModel.signIn(
+                    etMailSignIn.text.toString(), etPasswordSignIn.text.toString()
+                )
             }
             spannableText(
                 getString(R.string.signup_long),
@@ -41,7 +53,7 @@ class SignInFragment : Fragment() {
                 R.id.action_signInFragment_to_signUpFragment
             )
         }
-
+        observeData()
     }
 
     private fun spannableText(text: String, tv: TextView, navigate: Int) {
@@ -66,10 +78,22 @@ class SignInFragment : Fragment() {
         tv.highlightColor = Color.TRANSPARENT
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun observeData() = with(binding) {
+        viewModel.signInState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                SignInState.Loading -> progressBar.visible()
+
+                is SignInState.Success -> {
+                    progressBar.gone()
+                    sharedPref.edit().putBoolean("isLogin", true).apply()
+                    findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeFragment())
+                }
+
+                is SignInState.ShowMessage -> {
+                    progressBar.gone()
+                    Snackbar.make(requireView(), state.errorMessage, 1000).show()
+                }
+            }
+        }
     }
-
-
 }

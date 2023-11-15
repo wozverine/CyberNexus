@@ -24,7 +24,7 @@ class SearchViewModel @Inject constructor(private val productRepository: Product
         _searchState.value = when (val result = productRepository.searchProduct(query)) {
             is Resource.Success -> SearchState.SuccessState(result.data)
             is Resource.Fail -> SearchState.EmptyScreen(result.failMessage)
-            is Resource.Error -> SearchState.ShowPopUp(result.errorMessage)
+            is Resource.Error -> SearchState.ShowMessage(result.errorMessage)
         }
     }
 
@@ -37,5 +37,5 @@ sealed interface SearchState {
     object Loading : SearchState
     data class SuccessState(val products: List<ProductUI>) : SearchState
     data class EmptyScreen(val failMessage: String) : SearchState
-    data class ShowPopUp(val errorMessage: String) : SearchState
+    data class ShowMessage(val errorMessage: String) : SearchState
 }

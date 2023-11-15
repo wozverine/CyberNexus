@@ -2,53 +2,69 @@ package com.glitch.cybernexus.ui.favorites
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.glitch.cybernexus.data.model.response.Product
+import com.bumptech.glide.Glide
+import com.glitch.cybernexus.data.model.response.ProductUI
 import com.glitch.cybernexus.databinding.ItemProductHomeBinding
 
 class FavoriteProductsAdapter(
-    private val onFavoriteProductClick: (String) -> Unit
-) : RecyclerView.Adapter<FavoriteProductsAdapter.FavoriteProductsViewHolder>() {
-    private val allFavoriteProductsList = mutableListOf<Product>()
+    private val onProductClick: (Int) -> Unit,
+    private val onDeleteClick: (ProductUI) -> Unit
+) : ListAdapter<ProductUI, FavoriteProductsAdapter.FavoriteProductsViewHolder>(FavProductDiffUtilCallBack()) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): FavoriteProductsViewHolder {
-        val binding =
-            ItemProductHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return FavoriteProductsViewHolder(binding, onFavoriteProductClick)
+        return FavoriteProductsViewHolder(
+            ItemProductHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            onProductClick,
+            onDeleteClick
+        )
     }
 
-    override fun onBindViewHolder(
-        holder: FavoriteProductsViewHolder, position: Int
-    ) {
-        holder.bind(allFavoriteProductsList[position])
-    }
+    override fun onBindViewHolder(holder: FavoriteProductsViewHolder, position: Int) = holder.bind(getItem(position))
 
-    override fun getItemCount(): Int {
-        return allFavoriteProductsList.size
-    }
 
     class FavoriteProductsViewHolder(
-        private val binding: ItemProductHomeBinding, val onFavoriteProductClick: (String) -> Unit
+        private val binding: ItemProductHomeBinding,
+        private val onFavoriteProductClick: (Int) -> Unit,
+        private val onDeleteClick: (ProductUI) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(product: Product) {
+        fun bind(product: ProductUI) {
             with(binding) {
                 val strList = product.title?.split(" ")
 
                 tvProductName.text = product.title
                 tvCategory.text = product.category
 
+                tvPrice.text = buildString {
+                    if (product.saleState) {
+                        append("FLASH SALE: ")
+                        append(product.salePrice)
+                    } else {
+                        append(product.price)
+                    }
+                    append(" ₺")
+                }
+
+                Glide.with(productIv).load(product.imageOne).into(productIv)
+
                 root.setOnClickListener {
-                    product.title?.let { it1 -> onFavoriteProductClick(it1) }
+                    onFavoriteProductClick(product.id)
                 }
             }
         }
     }
 
-    fun updateList(list: List<Product>) {
-        allFavoriteProductsList.clear()
-        allFavoriteProductsList.addAll(list)
-        notifyItemRangeChanged(0, list.size)
+    class FavProductDiffUtilCallBack : DiffUtil.ItemCallback<ProductUI>() {
+        override fun areItemsTheSame(oldItem: ProductUI, newItem: ProductUI): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: ProductUI, newItem: ProductUI): Boolean {
+            return oldItem == newItem
+        }
     }
 }
